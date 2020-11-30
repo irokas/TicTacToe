@@ -216,13 +216,6 @@ constantinople@^4.0.1:
     "@babel/parser" "^7.6.0"
     "@babel/types" "^7.6.1"
 
-constantinople@~3.0.1:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/constantinople/-/constantinople-3.0.2.tgz#4b945d9937907bcd98ee575122c3817516544141"
-  integrity sha1-S5RdmTeQe82Y7ldRIsOBdRZUQUE=
-  dependencies:
-    acorn "^2.1.0"
-
 content-disposition@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.2.tgz#0cf68bb9ddf5f2be7961c3a85178cb85dba78cb4"
@@ -533,7 +526,7 @@ jade@~1.11.0:
     character-parser "1.2.1"
     clean-css "^3.1.9"
     commander "~2.6.0"
-    constantinople "~3.0.1"
+    constantinople "~4.0.1"
     jstransformer "0.0.2"
     mkdirp "~0.5.0"
     transformers "2.1.0"
