@@ -1,7 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import React, { useState, useEffect } from "react";
 function App() {
+  const [hello, setHello] = useState("No data");
+
+  const callApi = () => {
+    fetch("http://localhost:9000/newRoute")
+      .then((r) => r.text())
+      .then((resp) => {
+        setHello(resp);
+      });
+  };
+  useEffect(() => {
+    callApi();
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
