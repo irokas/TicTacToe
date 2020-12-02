@@ -3,23 +3,23 @@ import { Square } from "./Square";
 
 export const Grid = () => {
   return (
-    <div className="grid">
-      <div>
+    <table className="grid">
+      <th>
         <Square />
         <Square />
         <Square />
-      </div>
-      <div>
+      </th>
+      <th>
         <Square />
         <Square />
         <Square />
-      </div>
-      <div>
+      </th>
+      <th>
         <Square />
         <Square />
         <Square />
-      </div>
-    </div>
+      </th>
+    </table>
   );
 };
 
