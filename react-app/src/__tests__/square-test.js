@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 
 import Square from "../Square";
 
-describe("A suite", function () {
+describe("Square test", function () {
   it("should render without throwing an error", function () {
     expect(
       shallow(<Square />).contains(<button className="square"></button>)
