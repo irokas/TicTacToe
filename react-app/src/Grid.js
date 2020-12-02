@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { createPortal } from "react-dom";
 import { Square } from "./Square";
 
 export const Grid = () => {
   const [turn, setTurn] = useState("X");
   const [squares, setSquares] = useState(Array(9).fill(""));
+  //const [title, setTitle] = useState("Next Player: X");
   const handleClick = (squareIndex) => {
     if (squares[squareIndex] === "") {
       let squaresCopy = squares;
@@ -15,6 +17,41 @@ export const Grid = () => {
       }
       setSquares(squaresCopy);
     }
+    if (declareWinner(squareIndex)) {
+      console.log("Winner");
+      return;
+    }
+  };
+
+  const declareWinner = (i) => {
+    const row = Math.floor(i / 3);
+    const col = i % 3;
+    const firstOfRow = row * 3;
+    const isInDiagonal = i % 2 === 0 ? true : false;
+    if (
+      squares[firstOfRow] === squares[firstOfRow + 1] &&
+      squares[firstOfRow + 2] === squares[firstOfRow + 1]
+    ) {
+      return true;
+    }
+    if (
+      squares[col] === squares[col + 3] &&
+      squares[col + 6] === squares[col + 3]
+    ) {
+      return true;
+    }
+    if (isInDiagonal) {
+      if (i % 4 === 0) {
+        if (squares[0] === squares[4] && squares[4] === squares[8]) {
+          return true;
+        }
+      } else {
+        if (squares[2] === squares[4] && squares[4] === squares[6]) {
+          return true;
+        }
+      }
+    }
+    return false;
   };
   return (
     <table className="grid">
