@@ -4,19 +4,23 @@ import { Square } from "./Square";
 export const Grid = () => {
   const [turn, setTurn] = useState("X");
   const [squares, setSquares] = useState(Array(9).fill(""));
+  const [title, setTitle] = useState("Next Player: X");
+
   const handleClick = (squareIndex) => {
     if (squares[squareIndex] === "") {
       let squaresCopy = squares;
       squaresCopy[squareIndex] = turn;
       if (turn === "X") {
         setTurn("O");
+        setTitle("Next Player: O");
       } else {
         setTurn("X");
+        setTitle("Next Player: X");
       }
       setSquares(squaresCopy);
     }
     if (declareWinner(squareIndex)) {
-      console.log("Winner");
+      setTitle("WINNER: " + turn);
       return;
     }
   };
@@ -53,6 +57,7 @@ export const Grid = () => {
   };
   return (
     <table className="grid">
+      <h1>{title}</h1>
       <th>
         <Square onClick={() => handleClick(0)} turn={squares[0]} />
         <Square onClick={() => handleClick(1)} turn={squares[1]} />
