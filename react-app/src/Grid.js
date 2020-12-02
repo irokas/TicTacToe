@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Square } from "./Square";
 
 export const Grid = () => {
-  const [turn, setTurn] = useState("");
+  const [turn, setTurn] = useState("X");
   const [squares, setSquares] = useState(Array(9).fill(""));
   const handleClick = (squareIndex) => {
     if (squares[squareIndex] === "") {
