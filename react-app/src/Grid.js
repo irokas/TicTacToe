@@ -7,6 +7,9 @@ export const Grid = () => {
   const [title, setTitle] = useState("Next Player: X");
 
   const handleClick = (squareIndex) => {
+    if (turn === "ended") {
+      return;
+    }
     if (squares[squareIndex] === "") {
       let squaresCopy = squares;
       squaresCopy[squareIndex] = turn;
@@ -21,6 +24,7 @@ export const Grid = () => {
     }
     if (declareWinner(squareIndex)) {
       setTitle("WINNER: " + turn);
+      setTurn("ended");
       return;
     }
   };
