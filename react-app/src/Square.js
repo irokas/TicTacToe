@@ -1,6 +1,6 @@
 import React from "react";
 
-const Square = () => {
+export const Square = () => {
   return <button className="square"></button>;
 };
 
