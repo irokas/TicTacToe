@@ -10,8 +10,8 @@ describe("Grid test", () => {
   it('should be selectable by class "grid"', () => {
     expect(grid.is(".grid")).toBe(true);
   });
-  it("should contain 3 children divs", () => {
-    expect(grid.children().length).toBe(3);
+  it("should contain 4 children, 3 divs and 1 h1", () => {
+    expect(grid.children().length).toBe(4);
   });
   it("should contain 9 squares", () => {
     expect(grid.find(Square).length).toBe(9);
