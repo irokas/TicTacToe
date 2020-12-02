@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { createPortal } from "react-dom";
 import { Square } from "./Square";
 
 export const Grid = () => {
   const [turn, setTurn] = useState("X");
   const [squares, setSquares] = useState(Array(9).fill(""));
-  //const [title, setTitle] = useState("Next Player: X");
   const handleClick = (squareIndex) => {
     if (squares[squareIndex] === "") {
       let squaresCopy = squares;
