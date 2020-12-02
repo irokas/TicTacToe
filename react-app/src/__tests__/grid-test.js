@@ -16,4 +16,18 @@ describe("Grid test", () => {
   it("should contain 9 squares", () => {
     expect(grid.find(Square).length).toBe(9);
   });
+  it("check initial value of square", () => {
+    expect(grid.find(Square).at(1).prop("turn")).toBe("");
+  });
+  it("check initial value of all squares", () => {
+    grid.find(Square).map((square) => expect(square.prop("turn")).toBe(""));
+  });
+  it("check square value after first click", () => {
+    grid.find(Square).at(1).simulate("click");
+    expect(grid.find(Square).at(1).prop("turn")).toBe("X");
+  });
+  it("check square value after second click", () => {
+    grid.find(Square).at(4).simulate("click");
+    expect(grid.find(Square).at(4).prop("turn")).toBe("O");
+  });
 });
