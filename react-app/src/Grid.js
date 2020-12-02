@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-import react from "react";
+import React from "react";
 import { Square } from "./Square";
 
 export const Grid = () => {
