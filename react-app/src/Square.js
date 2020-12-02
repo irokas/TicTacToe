@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const Square = () => {
-  return <td className="square"></td>;
+  const [squareValue, setSquareValue] = useState("");
+
+  const handleClick = () => {
+    if (squareValue === "") {
+      setSquareValue("X");
+    }
+  };
+  return (
+    <td className="square" onClick={handleClick}>
+      {squareValue}
+    </td>
+  );
 };
 
 export default Square;
