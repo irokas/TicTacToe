@@ -1,6 +1,7 @@
-// eslint-disable-next-line no-unused-vars
-import react from "react";
+import React from "react";
 
-export const Square = () => {
+const Square = () => {
   return <button className="square"></button>;
 };
+
+export default Square;
