@@ -10,7 +10,7 @@ describe("Square test", function () {
     ).toBe(true);
   });
 
-  it('should be selectable by class "Class"', function () {
+  it('should be selectable by class "square"', function () {
     expect(shallow(<Square />).is(".square")).toBe(true);
   });
 });
