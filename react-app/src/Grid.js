@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Square } from "./Square";
 
 export const Grid = () => {
-  const [turn, setTurn] = useState("X");
+  const [turn, setTurn] = useState("");
   const [squares, setSquares] = useState(Array(9).fill(""));
   const [title, setTitle] = useState("Choose Type of Game");
   const [game, setGame] = useState("");
@@ -31,11 +31,10 @@ export const Grid = () => {
     if (declareTie()) {
       setTitle("IT'S A TIE");
       setTurn("ended");
-      return;
     }
   };
   const handleClick = (squareIndex) => {
-    if (turn === "ended") {
+    if (turn === "ended" || turn === "") {
       return;
     }
     if (squares[squareIndex] === "") {
@@ -44,6 +43,10 @@ export const Grid = () => {
       } else {
         markCell(squareIndex, turn);
       }
+    }
+    if (turn === "ended") {
+      console.log("ENDED");
+      return;
     }
     if (game === "PvC") {
       computerMove();
