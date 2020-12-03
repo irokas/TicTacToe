@@ -7,24 +7,24 @@ export const Grid = () => {
   const [title, setTitle] = useState("Choose Type of Game");
   const [game, setGame] = useState("");
 
-  const handleClick = (squareIndex) => {
+  const markCell = (squareIndex, mark) => {
     if (turn === "ended" || game === "") {
       return;
     }
-    if (squares[squareIndex] === "") {
-      let squaresCopy = squares;
-      squaresCopy[squareIndex] = turn;
-      if (turn === "X") {
-        setTurn("O");
-        setTitle("Next Player: O");
-      } else {
-        setTurn("X");
-        setTitle("Next Player: X");
-      }
-      setSquares(squaresCopy);
+    let squaresCopy = squares;
+    squaresCopy[squareIndex] = mark;
+    if (turn === "X") {
+      setTurn("O");
+    } else {
+      setTurn("X");
     }
+    const next = mark === "X" ? "O" : "X";
+    setTitle(`Next Player: ${next}`);
+
+    setSquares(squaresCopy);
+
     if (declareWinner(squareIndex)) {
-      setTitle("WINNER: " + turn);
+      setTitle("WINNER: " + mark);
       setTurn("ended");
       return;
     }
@@ -33,16 +33,30 @@ export const Grid = () => {
       setTurn("ended");
       return;
     }
-    if (game === "PvP") {
+  };
+  const handleClick = (squareIndex) => {
+    if (turn === "ended") {
       return;
-    } else if (game === "PvC") {
+    }
+    if (squares[squareIndex] === "") {
+      if (game === "PvC") {
+        markCell(squareIndex, "X");
+      } else {
+        markCell(squareIndex, turn);
+      }
+    }
+    if (game === "PvC") {
       computerMove();
-      return;
     }
   };
   const computerMove = () => {
+    if (turn === "ended") {
+      return;
+    }
     const emptyCells = findEmptyCells();
-    console.log(emptyCells);
+    const randomCell = Math.floor(Math.random() * emptyCells.length);
+    const squareIndex = emptyCells[randomCell];
+    markCell(squareIndex, "O");
   };
   const findEmptyCells = () => {
     let emptyCells = [];
@@ -89,6 +103,7 @@ export const Grid = () => {
         }
       }
     }
+    console.log("false " + i);
     return false;
   };
   return (
@@ -99,6 +114,7 @@ export const Grid = () => {
         <button
           onClick={() => {
             setGame("PvP");
+            setTurn("X");
             setTitle("Next Player: X");
           }}
         >
@@ -107,6 +123,7 @@ export const Grid = () => {
         <button
           onClick={() => {
             setGame("PvC");
+            setTurn("X");
             setTitle("Next Player: X");
           }}
         >
@@ -115,9 +132,9 @@ export const Grid = () => {
       </div>
 
       <th>
-        <Square onClick={() => handleClick(0)} turn={squares[0]} />
-        <Square onClick={() => handleClick(1)} turn={squares[1]} />
-        <Square onClick={() => handleClick(2)} turn={squares[2]} />
+        <Square key="1" onClick={() => handleClick(0)} turn={squares[0]} />
+        <Square key="2" onClick={() => handleClick(1)} turn={squares[1]} />
+        <Square key="3" onClick={() => handleClick(2)} turn={squares[2]} />
       </th>
       <th>
         <Square onClick={() => handleClick(3)} turn={squares[3]} />
