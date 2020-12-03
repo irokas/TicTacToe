@@ -3,12 +3,10 @@ import { shallow } from "enzyme";
 
 import Grid from "../Grid";
 import Square from "../Square";
-/*
-const grid = shallow(<Grid />)
-  .find(".PvP")
-  .at(0)
-  .simulate("click");
-console.log(grid.debug());
+
+const grid = shallow(<Grid />);
+grid.find("#PvP").simulate("click"); //start PvP game on grid
+
 describe("Tie tests", () => {
   it("Should declare tie", () => {
     //Simulate a game that ends with a tie
@@ -22,6 +20,6 @@ describe("Tie tests", () => {
     grid.find(Square).at(7).simulate("click"); //O->7
     grid.find(Square).at(8).simulate("click"); //X->8
 
-    expect(grid.childAt(0).text()).toBe("IT'S A TIE");
+    expect(grid.find("#title").text()).toBe("IT'S A TIE");
   });
-});*/
+});
