@@ -113,7 +113,9 @@ export const Grid = () => {
     <table className="grid">
       <h1 id="title">{title}</h1>
       <div>
-        <button onClick={() => setSquares(Array(9).fill(""))}>Reset</button>
+        <button id="reset" onClick={() => setSquares(Array(9).fill(""))}>
+          Reset
+        </button>
         <button
           id="PvP"
           onClick={() => {
