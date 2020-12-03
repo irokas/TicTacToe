@@ -22,12 +22,21 @@ describe("Grid test", () => {
   it("check initial value of all squares", () => {
     grid.find(Square).map((square) => expect(square.prop("turn")).toBe(""));
   });
+  it("next turn should be x", () => {
+    expect(grid.childAt(0).text()).toBe("Next Player: X");
+  });
   it("check square value after first click", () => {
     grid.find(Square).at(1).simulate("click");
     expect(grid.find(Square).at(1).prop("turn")).toBe("X");
   });
+  it("next turn should be O", () => {
+    expect(grid.childAt(0).text()).toBe("Next Player: O");
+  });
   it("check square value after second click", () => {
     grid.find(Square).at(4).simulate("click");
     expect(grid.find(Square).at(4).prop("turn")).toBe("O");
+  });
+  it("next turn should be x again", () => {
+    expect(grid.childAt(0).text()).toBe("Next Player: X");
   });
 });
