@@ -116,6 +116,7 @@ export const Grid = () => {
       <div>
         <button>Reset</button>
         <button
+          id="PvP"
           onClick={() => {
             setGame("PvP");
             setTurn("X");
@@ -125,6 +126,7 @@ export const Grid = () => {
           Person vs Person
         </button>
         <button
+          id="PvC"
           onClick={() => {
             setGame("PvC");
             setTurn("X");
@@ -136,9 +138,9 @@ export const Grid = () => {
       </div>
 
       <th>
-        <Square key="1" onClick={() => handleClick(0)} turn={squares[0]} />
-        <Square key="2" onClick={() => handleClick(1)} turn={squares[1]} />
-        <Square key="3" onClick={() => handleClick(2)} turn={squares[2]} />
+        <Square onClick={() => handleClick(0)} turn={squares[0]} />
+        <Square onClick={() => handleClick(1)} turn={squares[1]} />
+        <Square onClick={() => handleClick(2)} turn={squares[2]} />
       </th>
       <th>
         <Square onClick={() => handleClick(3)} turn={squares[3]} />
