@@ -2,15 +2,26 @@ import React from "react";
 import { shallow } from "enzyme";
 import { Grid } from "../Grid";
 import { Square } from "../Square";
-const grid = shallow(<Grid />);
-
+const gridX = shallow(<Grid />);
+const gridO = shallow(<Grid />);
 describe("Tests for declaring winner", () => {
   it("should declare X as winner", () => {
-    grid.find(Square).at(0).simulate("click");
-    grid.find(Square).at(3).simulate("click");
-    grid.find(Square).at(1).simulate("click");
-    grid.find(Square).at(5).simulate("click");
-    grid.find(Square).at(2).simulate("click");
-    expect(grid.childAt(0).text()).toBe("WINNER: X");
+    gridX.find(Square).at(0).simulate("click");
+    gridX.find(Square).at(3).simulate("click");
+    gridX.find(Square).at(1).simulate("click");
+    gridX.find(Square).at(5).simulate("click");
+    gridX.find(Square).at(2).simulate("click");
+
+    expect(gridX.childAt(0).text()).toBe("WINNER: X");
+  });
+  it("should declare O as winner", () => {
+    gridO.find(Square).at(4).simulate("click");
+    gridO.find(Square).at(0).simulate("click");
+    gridO.find(Square).at(3).simulate("click");
+    gridO.find(Square).at(1).simulate("click");
+    gridO.find(Square).at(8).simulate("click");
+    gridO.find(Square).at(2).simulate("click");
+
+    expect(gridO.childAt(0).text()).toBe("WINNER: O");
   });
 });
