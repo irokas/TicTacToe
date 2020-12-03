@@ -27,8 +27,18 @@ export const Grid = () => {
       setTurn("ended");
       return;
     }
+    if (declareTie()) {
+      setTitle("IT'S A TIE");
+      setTurn("ended");
+    }
   };
-
+  const declareTie = () => {
+    const condition = (value) => value !== "";
+    if (squares.every(condition)) {
+      return true;
+    }
+    return false;
+  };
   const declareWinner = (i) => {
     const row = Math.floor(i / 3);
     const col = i % 3;
