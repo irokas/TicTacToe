@@ -4,10 +4,11 @@ import { Square } from "./Square";
 export const Grid = () => {
   const [turn, setTurn] = useState("X");
   const [squares, setSquares] = useState(Array(9).fill(""));
-  const [title, setTitle] = useState("Next Player: X");
+  const [title, setTitle] = useState("Choose Type of Game");
+  const [game, setGame] = useState("");
 
   const handleClick = (squareIndex) => {
-    if (turn === "ended") {
+    if (turn === "ended" || game === "") {
       return;
     }
     if (squares[squareIndex] === "") {
@@ -72,6 +73,26 @@ export const Grid = () => {
   return (
     <table className="grid">
       <h1>{title}</h1>
+      <div>
+        <button>Reset</button>
+        <button
+          onClick={() => {
+            setGame("PvP");
+            setTitle("Next Player: X");
+          }}
+        >
+          Person vs Person
+        </button>
+        <button
+          onClick={() => {
+            setGame("PvC");
+            setTitle("Next Player: X");
+          }}
+        >
+          Person vs Computer
+        </button>
+      </div>
+
       <th>
         <Square onClick={() => handleClick(0)} turn={squares[0]} />
         <Square onClick={() => handleClick(1)} turn={squares[1]} />
