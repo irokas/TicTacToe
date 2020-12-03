@@ -24,4 +24,11 @@ describe("Tests for declaring winner", () => {
 
     expect(gridO.childAt(0).text()).toBe("WINNER: O");
   });
+  it("should keep the grid unchanged after a winner is declared", () => {
+    const copyGridO = gridO;
+    copyGridO.find(Square).at(7).simulate("click");
+    copyGridO.find(Square).at(5).simulate("click");
+
+    expect(gridO === copyGridO).toBe(true);
+  });
 });
