@@ -107,12 +107,11 @@ export const Grid = () => {
         }
       }
     }
-    console.log("false " + i);
     return false;
   };
   return (
     <table className="grid">
-      <h1>{title}</h1>
+      <h1 id="title">{title}</h1>
       <div>
         <button>Reset</button>
         <button

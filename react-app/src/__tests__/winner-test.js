@@ -5,9 +5,9 @@ import { Square } from "../Square";
 
 const gridX = shallow(<Grid />); //Grid to test when X is winner
 const gridO = shallow(<Grid />); //Grid to test when O is winner
-
+gridX.find("#PvP").simulate("click"); //start PvP game on gridX
+gridO.find("#PvP").simulate("click"); //start PvP game on gridO
 describe("Tests for declaring winner", () => {
-  /*
   //Simulate a game where X is winner
   it("should declare X as winner", () => {
     gridX.find(Square).at(0).simulate("click"); //X->0
@@ -16,7 +16,7 @@ describe("Tests for declaring winner", () => {
     gridX.find(Square).at(5).simulate("click"); //O->5
     gridX.find(Square).at(2).simulate("click"); //X->2
 
-    expect(gridX.childAt(2).text()).toBe("WINNER: X");
+    expect(gridX.find("#title").text()).toBe("WINNER: X");
   });
 
   //Simulate a game where O is winner
@@ -28,7 +28,7 @@ describe("Tests for declaring winner", () => {
     gridO.find(Square).at(8).simulate("click"); //X->8
     gridO.find(Square).at(2).simulate("click"); //O->2
 
-    expect(gridO.childAt(2).text()).toBe("WINNER: O");
+    expect(gridO.find("#title").text()).toBe("WINNER: O");
   });
 
   //Create a duplicate of finished game and click on
@@ -39,5 +39,5 @@ describe("Tests for declaring winner", () => {
     copyGridO.find(Square).at(5).simulate("click");
     copyGridO.find(Square).at(6).simulate("click");
     expect(gridO === copyGridO).toBe(true);
-  });*/
+  });
 });
