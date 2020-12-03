@@ -31,7 +31,28 @@ export const Grid = () => {
     if (declareTie()) {
       setTitle("IT'S A TIE");
       setTurn("ended");
+      return;
     }
+    if (game === "PvP") {
+      return;
+    } else if (game === "PvC") {
+      computerMove();
+      return;
+    }
+  };
+  const computerMove = () => {
+    const emptyCells = findEmptyCells();
+    console.log(emptyCells);
+  };
+  const findEmptyCells = () => {
+    let emptyCells = [];
+    squares.map((square, index) => {
+      if (square === "") {
+        emptyCells.push(index);
+      }
+      return index;
+    });
+    return emptyCells;
   };
   const declareTie = () => {
     const condition = (value) => value !== "";
