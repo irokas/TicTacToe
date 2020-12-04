@@ -22,7 +22,7 @@ export const declareWinner = (squares, i) => {
   const row = Math.floor(i / 3);
   const col = i % 3;
   const firstOfRow = row * 3;
-  const isInDiagonal = i % 2 === 0 ? true : false;
+  const isInDiagonal = i % 2 === 0;
   if (
     squares[firstOfRow] === squares[firstOfRow + 1] &&
     squares[firstOfRow + 2] === squares[firstOfRow + 1]
@@ -40,10 +40,8 @@ export const declareWinner = (squares, i) => {
       if (squares[0] === squares[4] && squares[4] === squares[8]) {
         return true;
       }
-    } else {
-      if (squares[2] === squares[4] && squares[4] === squares[6]) {
-        return true;
-      }
+    } else if (squares[2] === squares[4] && squares[4] === squares[6]) {
+      return true;
     }
   }
   return false;
@@ -91,10 +89,8 @@ export const Grid = () => {
         if (markCell(squareIndex, "X") === false) {
           return;
         }
-      } else {
-        if (markCell(squareIndex, turn) === false) {
-          return;
-        }
+      } else if (markCell(squareIndex, turn) === false) {
+        return;
       }
     } else {
       return;
