@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import Square from "../Square";
+import { Square } from "../Square";
 
 describe("Square test", function () {
   it("should render without throwing an error", () => {

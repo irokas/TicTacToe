@@ -17,6 +17,13 @@
         "array-callback-return":"off",
         "no-console":"off",
         "prefer-template": "off",
-        "consistent-return": "off"
+        "consistent-return": "off",
+        "func-names": "off",
+        "prefer-arrow-callback": "off",
+        "react/self-closing-comp": "off",
+        "comma-dangle": "off"
+    },
+    "env": {
+        "jest": true
     }
 }

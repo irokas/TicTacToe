@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import Grid from "../Grid";
-import Square from "../Square";
+import { Grid } from "../Grid";
+import { Square } from "../Square";
 
 const grid = shallow(<Grid />);
 
