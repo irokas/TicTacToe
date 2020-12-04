@@ -143,19 +143,19 @@ export const Grid = () => {
       </div>
 
       <th>
-        <Square onClick={() => handleClick(0)} turn={squares[0]} />
-        <Square onClick={() => handleClick(1)} turn={squares[1]} />
-        <Square onClick={() => handleClick(2)} turn={squares[2]} />
+        {[0,1,2].map(key => {
+          return <Square onClick={() => handleClick(key)} turn={squares[key]} />
+        })}
       </th>
       <th>
-        <Square onClick={() => handleClick(3)} turn={squares[3]} />
-        <Square onClick={() => handleClick(4)} turn={squares[4]} />
-        <Square onClick={() => handleClick(5)} turn={squares[5]} />
+        {[3,4,5].map(key => {
+          return <Square onClick={() => handleClick(key)} turn={squares[key]} />
+        })}
       </th>
       <th>
-        <Square onClick={() => handleClick(6)} turn={squares[6]} />
-        <Square onClick={() => handleClick(7)} turn={squares[7]} />
-        <Square onClick={() => handleClick(8)} turn={squares[8]} />
+      {[6,7,8].map(key => {
+          return <Square onClick={() => handleClick(key)} turn={squares[key]} />
+        })}
       </th>
     </table>
   );
