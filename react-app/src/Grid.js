@@ -11,7 +11,43 @@ export const findEmptyCells = (squares) => {
   });
   return emptyCells;
 };
-
+export const declareTie = (squares) => {
+  const condition = (value) => value !== "";
+  if (squares.every(condition)) {
+    return true;
+  }
+  return false;
+};
+export const declareWinner = (squares, i) => {
+  const row = Math.floor(i / 3);
+  const col = i % 3;
+  const firstOfRow = row * 3;
+  const isInDiagonal = i % 2 === 0 ? true : false;
+  if (
+    squares[firstOfRow] === squares[firstOfRow + 1] &&
+    squares[firstOfRow + 2] === squares[firstOfRow + 1]
+  ) {
+    return true;
+  }
+  if (
+    squares[col] === squares[col + 3] &&
+    squares[col + 6] === squares[col + 3]
+  ) {
+    return true;
+  }
+  if (isInDiagonal) {
+    if (i % 4 === 0) {
+      if (squares[0] === squares[4] && squares[4] === squares[8]) {
+        return true;
+      }
+    } else {
+      if (squares[2] === squares[4] && squares[4] === squares[6]) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
 export const Grid = () => {
   const [turn, setTurn] = useState("");
   const [squares, setSquares] = useState(Array(9).fill(""));
@@ -35,12 +71,12 @@ export const Grid = () => {
 
     setSquares(squaresCopy);
 
-    if (declareWinner(squareIndex)) {
+    if (declareWinner(squares, squareIndex)) {
       setTitle("WINNER: " + mark);
       setEnded(true);
       return false;
     }
-    if (declareTie()) {
+    if (declareTie(squares)) {
       setTitle("IT'S A TIE");
       setEnded(true);
       return false;
@@ -76,43 +112,7 @@ export const Grid = () => {
     const squareIndex = emptyCells[randomCell];
     setTimeout(() => markCell(squareIndex, "O"), 500);
   };
-  const declareTie = () => {
-    const condition = (value) => value !== "";
-    if (squares.every(condition)) {
-      return true;
-    }
-    return false;
-  };
-  const declareWinner = (i) => {
-    const row = Math.floor(i / 3);
-    const col = i % 3;
-    const firstOfRow = row * 3;
-    const isInDiagonal = i % 2 === 0 ? true : false;
-    if (
-      squares[firstOfRow] === squares[firstOfRow + 1] &&
-      squares[firstOfRow + 2] === squares[firstOfRow + 1]
-    ) {
-      return true;
-    }
-    if (
-      squares[col] === squares[col + 3] &&
-      squares[col + 6] === squares[col + 3]
-    ) {
-      return true;
-    }
-    if (isInDiagonal) {
-      if (i % 4 === 0) {
-        if (squares[0] === squares[4] && squares[4] === squares[8]) {
-          return true;
-        }
-      } else {
-        if (squares[2] === squares[4] && squares[4] === squares[6]) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
+
   const gameChange = (newGame) => {
     setSquares(Array(9).fill(""));
     setGame(newGame);
