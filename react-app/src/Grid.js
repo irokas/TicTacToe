@@ -62,7 +62,7 @@ export const Grid = () => {
     const emptyCells = findEmptyCells();
     const randomCell = Math.floor(Math.random() * emptyCells.length);
     const squareIndex = emptyCells[randomCell];
-    markCell(squareIndex, "O");
+    setTimeout(() => markCell(squareIndex, "O"), 500);
   };
   const findEmptyCells = () => {
     let emptyCells = [];
