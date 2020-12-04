@@ -10,7 +10,7 @@ export const Grid = () => {
 
   const markCell = (squareIndex, mark) => {
     if (ended === true || game === "") {
-      return "end";
+      return false;
     }
     let squaresCopy = squares;
     squaresCopy[squareIndex] = mark;
@@ -27,12 +27,12 @@ export const Grid = () => {
     if (declareWinner(squareIndex)) {
       setTitle("WINNER: " + mark);
       setEnded(true);
-      return "end";
+      return false;
     }
     if (declareTie()) {
       setTitle("IT'S A TIE");
       setEnded(true);
-      return "end";
+      return false;
     }
   };
   const handleClick = (squareIndex) => {
@@ -41,11 +41,11 @@ export const Grid = () => {
     }
     if (squares[squareIndex] === "") {
       if (game === "PvC") {
-        if (markCell(squareIndex, "X") === "end") {
+        if (markCell(squareIndex, "X") === false) {
           return;
         }
       } else {
-        if (markCell(squareIndex, turn) === "end") {
+        if (markCell(squareIndex, turn) === false) {
           return;
         }
       }
