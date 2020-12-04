@@ -112,6 +112,13 @@ export const Grid = () => {
     }
     return false;
   };
+  const gameChange = (newGame) => {
+    setSquares(Array(9).fill(""));
+    setGame(newGame);
+    setTurn("X");
+    setTitle("Next Player: X");
+    setEnded(false);
+  };
   return (
     <table className="grid">
       <h1 id="title">{title}</h1>
@@ -127,28 +134,10 @@ export const Grid = () => {
         >
           Reset
         </button>
-        <button
-          id="PvP"
-          onClick={() => {
-            setSquares(Array(9).fill(""));
-            setGame("PvP");
-            setTurn("X");
-            setTitle("Next Player: X");
-            setEnded(false);
-          }}
-        >
+        <button id="PvP" onClick={() => gameChange("PvP")}>
           Person vs Person
         </button>
-        <button
-          id="PvC"
-          onClick={() => {
-            setSquares(Array(9).fill(""));
-            setGame("PvC");
-            setTurn("X");
-            setTitle("Next Player: X");
-            setEnded(false);
-          }}
-        >
+        <button id="PvC" onClick={() => gameChange("PvC")}>
           Person vs Computer
         </button>
       </div>
