@@ -6,9 +6,10 @@ export const Grid = () => {
   const [squares, setSquares] = useState(Array(9).fill(""));
   const [title, setTitle] = useState("Choose Type of Game");
   const [game, setGame] = useState("");
+  const [ended, setEnded] = useState(false);
 
   const markCell = (squareIndex, mark) => {
-    if (turn === "ended" || game === "") {
+    if (ended === true || game === "") {
       return "end";
     }
     let squaresCopy = squares;
@@ -25,17 +26,17 @@ export const Grid = () => {
 
     if (declareWinner(squareIndex)) {
       setTitle("WINNER: " + mark);
-      setTurn("ended");
+      setEnded(true);
       return "end";
     }
     if (declareTie()) {
       setTitle("IT'S A TIE");
-      setTurn("ended");
+      setEnded(true);
       return "end";
     }
   };
   const handleClick = (squareIndex) => {
-    if (turn === "ended" || turn === "") {
+    if (ended === true || turn === "") {
       return;
     }
     if (squares[squareIndex] === "") {
@@ -56,7 +57,7 @@ export const Grid = () => {
     }
   };
   const computerMove = () => {
-    if (turn === "ended") {
+    if (ended === true) {
       return;
     }
     const emptyCells = findEmptyCells();
@@ -121,6 +122,7 @@ export const Grid = () => {
             setSquares(Array(9).fill(""));
             setTitle("Choose Type of Game");
             setGame("");
+            setEnded(false);
           }}
         >
           Reset
@@ -132,6 +134,7 @@ export const Grid = () => {
             setGame("PvP");
             setTurn("X");
             setTitle("Next Player: X");
+            setEnded(false);
           }}
         >
           Person vs Person
@@ -143,6 +146,7 @@ export const Grid = () => {
             setGame("PvC");
             setTurn("X");
             setTitle("Next Player: X");
+            setEnded(false);
           }}
         >
           Person vs Computer
