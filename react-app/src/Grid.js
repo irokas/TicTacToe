@@ -128,6 +128,7 @@ export const Grid = () => {
         <button
           id="PvP"
           onClick={() => {
+            setSquares(Array(9).fill(""));
             setGame("PvP");
             setTurn("X");
             setTitle("Next Player: X");
@@ -138,6 +139,7 @@ export const Grid = () => {
         <button
           id="PvC"
           onClick={() => {
+            setSquares(Array(9).fill(""));
             setGame("PvC");
             setTurn("X");
             setTitle("Next Player: X");
