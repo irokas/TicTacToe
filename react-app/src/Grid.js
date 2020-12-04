@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Square } from "./Square";
 
-const findEmptyCells = (squares) => {
+export const findEmptyCells = (squares) => {
   let emptyCells = [];
   squares.map((square, index) => {
     if (square === "") {
