@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import { Square } from "./Square";
 
+const findEmptyCells = (squares) => {
+  let emptyCells = [];
+  squares.map((square, index) => {
+    if (square === "") {
+      emptyCells.push(index);
+    }
+    return index;
+  });
+  return emptyCells;
+};
+
 export const Grid = () => {
   const [turn, setTurn] = useState("");
   const [squares, setSquares] = useState(Array(9).fill(""));
@@ -60,20 +71,10 @@ export const Grid = () => {
     if (ended === true) {
       return;
     }
-    const emptyCells = findEmptyCells();
+    const emptyCells = findEmptyCells(squares);
     const randomCell = Math.floor(Math.random() * emptyCells.length);
     const squareIndex = emptyCells[randomCell];
     setTimeout(() => markCell(squareIndex, "O"), 500);
-  };
-  const findEmptyCells = () => {
-    let emptyCells = [];
-    squares.map((square, index) => {
-      if (square === "") {
-        emptyCells.push(index);
-      }
-      return index;
-    });
-    return emptyCells;
   };
   const declareTie = () => {
     const condition = (value) => value !== "";
