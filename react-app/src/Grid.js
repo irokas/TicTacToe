@@ -48,6 +48,8 @@ export const Grid = () => {
           return;
         }
       }
+    } else {
+      return;
     }
     if (game === "PvC") {
       computerMove();
@@ -118,6 +120,7 @@ export const Grid = () => {
           onClick={() => {
             setSquares(Array(9).fill(""));
             setTitle("Choose Type of Game");
+            setGame("");
           }}
         >
           Reset
