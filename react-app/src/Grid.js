@@ -12,40 +12,70 @@ export const findEmptyCells = (squares) => {
   return emptyCells;
 };
 export const declareTie = (squares) => {
-  const condition = (value) => value !== "";
-  if (squares.every(condition)) {
+  if (findEmptyCells(squares).length === 0) {
     return true;
   }
   return false;
 };
-export const declareWinner = (squares, i) => {
-  const row = Math.floor(i / 3);
-  const col = i % 3;
-  const firstOfRow = row * 3;
-  const isInDiagonal = i % 2 === 0;
+export const declareWinner = (squares) => {
   if (
-    squares[firstOfRow] === squares[firstOfRow + 1] &&
-    squares[firstOfRow + 2] === squares[firstOfRow + 1]
+    squares[0] === squares[1] &&
+    squares[1] === squares[2] &&
+    squares[0] !== ""
   ) {
-    return true;
+    return squares[0];
   }
   if (
-    squares[col] === squares[col + 3] &&
-    squares[col + 6] === squares[col + 3]
+    squares[3] === squares[4] &&
+    squares[3] === squares[5] &&
+    squares[3] !== ""
   ) {
-    return true;
+    return squares[3];
   }
-  if (isInDiagonal) {
-    if (i % 4 === 0) {
-      if (squares[0] === squares[4] && squares[4] === squares[8]) {
-        return true;
-      }
-    } else if (squares[2] === squares[4] && squares[4] === squares[6]) {
-      return true;
-    }
+  if (
+    squares[6] === squares[7] &&
+    squares[6] === squares[8] &&
+    squares[6] !== ""
+  ) {
+    return squares[6];
   }
-  return false;
+  if (
+    squares[0] === squares[3] &&
+    squares[0] === squares[6] &&
+    squares[0] !== ""
+  ) {
+    return squares[0];
+  }
+  if (
+    squares[1] === squares[4] &&
+    squares[1] === squares[7] &&
+    squares[1] !== ""
+  ) {
+    return squares[1];
+  }
+  if (
+    squares[2] === squares[5] &&
+    squares[2] === squares[8] &&
+    squares[2] !== ""
+  ) {
+    return squares[2];
+  }
+  if (
+    squares[0] === squares[4] &&
+    squares[0] === squares[8] &&
+    squares[0] !== ""
+  ) {
+    return squares[0];
+  }
+  if (
+    squares[2] === squares[4] &&
+    squares[2] === squares[6] &&
+    squares[2] !== ""
+  ) {
+    return squares[2];
+  }
 };
+
 export const Grid = () => {
   const [turn, setTurn] = useState("");
   const [squares, setSquares] = useState(Array(9).fill(""));
@@ -57,8 +87,7 @@ export const Grid = () => {
     if (ended === true || game === "") {
       return false;
     }
-    let squaresCopy = squares;
-    squaresCopy[squareIndex] = mark;
+    squares[squareIndex] = mark;
     if (turn === "X") {
       setTurn("O");
     } else {
@@ -67,9 +96,7 @@ export const Grid = () => {
     const next = mark === "X" ? "O" : "X";
     setTitle(`Next Player: ${next}`);
 
-    setSquares(squaresCopy);
-
-    if (declareWinner(squares, squareIndex)) {
+    if (declareWinner(squares)) {
       setTitle("WINNER: " + mark);
       setEnded(true);
       return false;
@@ -99,14 +126,54 @@ export const Grid = () => {
       computerMove();
     }
   };
+
+  const makeBestMove = () => {
+    let bestScore = -Infinity;
+    let bestMove = -1;
+    let newBoard = squares.slice();
+    const emptyCells = findEmptyCells(squares);
+    for (let i = 0; i < emptyCells.length; i++) {
+      newBoard[emptyCells[i]] = "O";
+      const score = minimax(false, newBoard);
+      newBoard[emptyCells[i]] = "";
+      if (score > bestScore) {
+        bestScore = score;
+        bestMove = emptyCells[i];
+      }
+    }
+    markCell(bestMove, "O");
+  };
+  const minimax = (isCPUturn, board) => {
+    let newBoard = board.slice();
+    const emptyCells = findEmptyCells(board);
+    const winner = declareWinner(board);
+    if (winner === "X") {
+      return -1;
+    }
+    if (winner === "O") {
+      return 1;
+    }
+    if (declareTie(board)) {
+      return 0;
+    }
+    let scores = [];
+    const nextTurn = isCPUturn ? "O" : "X";
+    for (let i = 0; i < emptyCells.length; i++) {
+      newBoard[emptyCells[i]] = nextTurn;
+      scores.push(minimax(!isCPUturn, newBoard));
+      newBoard[emptyCells[i]] = "";
+    }
+    if (isCPUturn) {
+      return Math.max(...scores);
+    }
+    return Math.min(...scores);
+  };
   const computerMove = () => {
     if (ended === true) {
       return;
     }
-    const emptyCells = findEmptyCells(squares);
-    const randomCell = Math.floor(Math.random() * emptyCells.length);
-    const squareIndex = emptyCells[randomCell];
-    setTimeout(() => markCell(squareIndex, "O"), 500);
+
+    setTimeout(makeBestMove, 500);
   };
 
   const gameChange = (newGame, newTurn, newTitle) => {

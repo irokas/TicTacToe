@@ -21,7 +21,8 @@
         "func-names": "off",
         "prefer-arrow-callback": "off",
         "react/self-closing-comp": "off",
-        "comma-dangle": "off"
+        "comma-dangle": "off",
+        "no-plusplus": "off"
     },
     "env": {
         "jest": true
