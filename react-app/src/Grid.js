@@ -109,11 +109,11 @@ export const Grid = () => {
     setTimeout(() => markCell(squareIndex, "O"), 500);
   };
 
-  const gameChange = (newGame) => {
+  const gameChange = (newGame, newTurn, newTitle) => {
     setSquares(Array(9).fill(""));
     setGame(newGame);
-    setTurn("X");
-    setTitle("Next Player: X");
+    setTurn(newTurn);
+    setTitle(newTitle);
     setEnded(false);
   };
   return (
@@ -122,19 +122,20 @@ export const Grid = () => {
       <div>
         <button
           id="reset"
-          onClick={() => {
-            setSquares(Array(9).fill(""));
-            setTitle("Choose Type of Game");
-            setGame("");
-            setEnded(false);
-          }}
+          onClick={() => gameChange("", "", "Choose Type of Game")}
         >
           Reset
         </button>
-        <button id="PvP" onClick={() => gameChange("PvP")}>
+        <button
+          id="PvP"
+          onClick={() => gameChange("PvP", "X", "Next Player: X")}
+        >
           Person vs Person
         </button>
-        <button id="PvC" onClick={() => gameChange("PvC")}>
+        <button
+          id="PvC"
+          onClick={() => gameChange("PvC", "X", "Next Player: X")}
+        >
           Person vs Computer
         </button>
       </div>
