@@ -74,6 +74,7 @@ export const declareWinner = (squares) => {
   ) {
     return squares[2];
   }
+  return "";
 };
 
 export const Grid = () => {
@@ -96,7 +97,7 @@ export const Grid = () => {
     const next = mark === "X" ? "O" : "X";
     setTitle(`Next Player: ${next}`);
 
-    if (declareWinner(squares)) {
+    if (declareWinner(squares) !== "") {
       setTitle("WINNER: " + mark);
       setEnded(true);
       return false;
@@ -128,7 +129,7 @@ export const Grid = () => {
   };
 
   const makeBestMove = () => {
-    let bestScore = -Infinity;
+    let bestScore = -2;
     let bestMove = -1;
     let newBoard = squares.slice();
     const emptyCells = findEmptyCells(squares);
