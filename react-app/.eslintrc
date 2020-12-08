@@ -19,8 +19,22 @@
                 "blankLine": "always",
                 "prev": "export",
                 "next": "export"
+            },
+            {
+                "blankLine": "always",
+                "prev": "multiline-const",
+                "next": "multiline-const"
+            },
+            {
+                "blankLine": "always",
+                "prev":"*",
+                "next": "return"
             }
-        ]
+        ],
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-noninteractive-element-interactions":"off",
+        "react/destructuring-assignment": "off",
+        "react/prop-types": "off"
     },
     "env": {
         "jest": true

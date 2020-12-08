@@ -6,8 +6,10 @@ export const findEmptyCells = (squares) => {
     if (currentValue === "") {
       accumulator.push(currentIndex);
     }
+
     return accumulator;
   };
+
   return squares.reduce(reducer, []);
 };
 
@@ -15,6 +17,7 @@ export const declareTie = (squares) => {
   if (findEmptyCells(squares).length === 0) {
     return true;
   }
+
   return false;
 };
 
@@ -75,6 +78,7 @@ export const declareWinner = (squares) => {
   ) {
     return squares[2];
   }
+
   return "";
 };
 
@@ -110,6 +114,7 @@ export const minimax = (isCPUturn, board, depth) => {
   if (isCPUturn) {
     return Math.max(...scores);
   }
+
   return Math.min(...scores);
 };
 
@@ -136,13 +141,16 @@ export const Grid = () => {
     if (declareWinner(squares) !== "") {
       setTitle(`WINNER: ${mark}`);
       setEnded(true);
+
       return false;
     }
     if (declareTie(squares)) {
       setTitle("IT'S A TIE");
       setEnded(true);
+
       return false;
     }
+
     return true;
   };
 
@@ -198,6 +206,7 @@ export const Grid = () => {
     setTitle(newTitle);
     setEnded(false);
   };
+
   return (
     <table className="grid">
       <h1 id="title">{title}</h1>
