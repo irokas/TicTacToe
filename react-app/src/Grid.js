@@ -190,15 +190,15 @@ export const Grid = () => {
 
     const emptyCells = findEmptyCells(squares);
 
-    for (let i = 0; i < emptyCells.length; i += 1) {
-      newBoard[emptyCells[i]] = "O";
+    emptyCells.forEach((emptyCell) => {
+      newBoard[emptyCell] = "O";
       const score = minimax(false, newBoard, 0);
-      newBoard[emptyCells[i]] = "";
+      newBoard[emptyCell] = "";
       if (score > bestScore) {
         bestScore = score;
-        bestMove = emptyCells[i];
+        bestMove = emptyCell;
       }
-    }
+    });
 
     markCell(bestMove, "O");
   };
