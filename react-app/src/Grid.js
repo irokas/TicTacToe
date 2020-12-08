@@ -90,7 +90,7 @@ const minimax = (isCPUturn, board, depth) => {
   }
   let scores = [];
   const nextTurn = isCPUturn ? "O" : "X";
-  for (let i = 0; i < emptyCells.length; i++) {
+  for (let i = 0; i < emptyCells.length; i += 1) {
     newBoard[emptyCells[i]] = nextTurn;
     const score = minimax(!isCPUturn, newBoard, depth + 1);
     scores.push(score);
@@ -129,7 +129,7 @@ export const Grid = () => {
     setTitle(`Next Player: ${next}`);
 
     if (declareWinner(squares) !== "") {
-      setTitle("WINNER: " + mark);
+      setTitle(`WINNER: ${mark}`);
       setEnded(true);
       return false;
     }
@@ -138,6 +138,7 @@ export const Grid = () => {
       setEnded(true);
       return false;
     }
+    return true;
   };
   const handleClick = (squareIndex) => {
     if (ended === true || turn === "") {
@@ -145,10 +146,10 @@ export const Grid = () => {
     }
     if (squares[squareIndex] === "") {
       if (game === "PvC") {
-        if (markCell(squareIndex, "X") === false) {
+        if (!markCell(squareIndex, "X")) {
           return;
         }
-      } else if (markCell(squareIndex, turn) === false) {
+      } else if (!markCell(squareIndex, turn)) {
         return;
       }
     } else {
@@ -164,7 +165,7 @@ export const Grid = () => {
     let bestMove = -1;
     let newBoard = squares.slice();
     const emptyCells = findEmptyCells(squares);
-    for (let i = 0; i < emptyCells.length; i++) {
+    for (let i = 0; i < emptyCells.length; i += 1) {
       newBoard[emptyCells[i]] = "O";
       const score = minimax(false, newBoard, 0);
       newBoard[emptyCells[i]] = "";
