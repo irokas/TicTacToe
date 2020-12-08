@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { Square } from "./Square";
 
 export const findEmptyCells = (squares) => {
-  let emptyCells = [];
-  squares.map((square, index) => {
-    if (square === "") {
-      emptyCells.push(index);
+  const reducer = (accumulator, currentValue, currentIndex) => {
+    if (currentValue === "") {
+      accumulator.push(currentIndex);
     }
-    return index;
-  });
-  return emptyCells;
+    return accumulator;
+  };
+  return squares.reduce(reducer, []);
 };
 export const declareTie = (squares) => {
   if (findEmptyCells(squares).length === 0) {
