@@ -22,6 +22,7 @@ export const declareTie = (squares) => {
 };
 
 export const declareWinner = (squares) => {
+  // first row
   if (
     squares[0] === squares[1] &&
     squares[1] === squares[2] &&
@@ -29,6 +30,7 @@ export const declareWinner = (squares) => {
   ) {
     return squares[0];
   }
+  // second row
   if (
     squares[3] === squares[4] &&
     squares[3] === squares[5] &&
@@ -36,6 +38,7 @@ export const declareWinner = (squares) => {
   ) {
     return squares[3];
   }
+  // third row
   if (
     squares[6] === squares[7] &&
     squares[6] === squares[8] &&
@@ -43,6 +46,7 @@ export const declareWinner = (squares) => {
   ) {
     return squares[6];
   }
+  // first column
   if (
     squares[0] === squares[3] &&
     squares[0] === squares[6] &&
@@ -50,6 +54,7 @@ export const declareWinner = (squares) => {
   ) {
     return squares[0];
   }
+  // second column
   if (
     squares[1] === squares[4] &&
     squares[1] === squares[7] &&
@@ -57,6 +62,7 @@ export const declareWinner = (squares) => {
   ) {
     return squares[1];
   }
+  // third column
   if (
     squares[2] === squares[5] &&
     squares[2] === squares[8] &&
@@ -64,6 +70,7 @@ export const declareWinner = (squares) => {
   ) {
     return squares[2];
   }
+  // first diagonal
   if (
     squares[0] === squares[4] &&
     squares[0] === squares[8] &&
@@ -71,6 +78,7 @@ export const declareWinner = (squares) => {
   ) {
     return squares[0];
   }
+  // second diagonal
   if (
     squares[2] === squares[4] &&
     squares[2] === squares[6] &&
@@ -84,9 +92,10 @@ export const declareWinner = (squares) => {
 
 export const minimax = (isCPUturn, board, depth) => {
   let newBoard = board.slice();
-  const emptyCells = findEmptyCells(board);
 
+  const emptyCells = findEmptyCells(board);
   const winner = declareWinner(board);
+
   if (winner === "X") {
     return -1;
   }
@@ -178,7 +187,9 @@ export const Grid = () => {
     let bestScore = -2;
     let bestMove = -1;
     let newBoard = squares.slice();
+
     const emptyCells = findEmptyCells(squares);
+
     for (let i = 0; i < emptyCells.length; i += 1) {
       newBoard[emptyCells[i]] = "O";
       const score = minimax(false, newBoard, 0);
@@ -188,6 +199,7 @@ export const Grid = () => {
         bestMove = emptyCells[i];
       }
     }
+
     markCell(bestMove, "O");
   };
 
