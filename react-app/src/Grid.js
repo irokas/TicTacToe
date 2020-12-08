@@ -10,12 +10,14 @@ export const findEmptyCells = (squares) => {
   };
   return squares.reduce(reducer, []);
 };
+
 export const declareTie = (squares) => {
   if (findEmptyCells(squares).length === 0) {
     return true;
   }
   return false;
 };
+
 export const declareWinner = (squares) => {
   if (
     squares[0] === squares[1] &&
@@ -75,9 +77,11 @@ export const declareWinner = (squares) => {
   }
   return "";
 };
-const minimax = (isCPUturn, board, depth) => {
+
+export const minimax = (isCPUturn, board, depth) => {
   let newBoard = board.slice();
   const emptyCells = findEmptyCells(board);
+
   const winner = declareWinner(board);
   if (winner === "X") {
     return -1;
@@ -108,6 +112,7 @@ const minimax = (isCPUturn, board, depth) => {
   }
   return Math.min(...scores);
 };
+
 export const Grid = () => {
   const [turn, setTurn] = useState("");
   const [squares, setSquares] = useState(Array(9).fill(""));
@@ -140,6 +145,7 @@ export const Grid = () => {
     }
     return true;
   };
+
   const handleClick = (squareIndex) => {
     if (ended === true || turn === "") {
       return;
@@ -176,6 +182,7 @@ export const Grid = () => {
     }
     markCell(bestMove, "O");
   };
+
   const computerMove = () => {
     if (ended === true) {
       return;

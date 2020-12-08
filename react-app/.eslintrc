@@ -11,7 +11,16 @@
         "import/prefer-default-export": "off",
         "no-use-before-define":"off",
         "no-console":"warn",
-        "prefer-template": "warn"
+        "prefer-template": "warn",
+        "no-tabs":"off",
+        "padding-line-between-statements": [
+            "error",
+            {
+                "blankLine": "always",
+                "prev": "export",
+                "next": "export"
+            }
+        ]
     },
     "env": {
         "jest": true
