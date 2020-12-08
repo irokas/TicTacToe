@@ -93,7 +93,15 @@ const minimax = (isCPUturn, board, depth) => {
   const nextTurn = isCPUturn ? "O" : "X";
   for (let i = 0; i < emptyCells.length; i++) {
     newBoard[emptyCells[i]] = nextTurn;
-    scores.push(minimax(!isCPUturn, newBoard, depth + 1));
+    const score = minimax(!isCPUturn, newBoard, depth + 1);
+    scores.push(score);
+    if (isCPUturn) {
+      if (score > 0) {
+        break;
+      }
+    } else if (score < 0) {
+      break;
+    }
     newBoard[emptyCells[i]] = "";
   }
   if (isCPUturn) {
