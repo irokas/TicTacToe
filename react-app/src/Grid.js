@@ -135,7 +135,7 @@ export const Grid = () => {
   const [ended, setEnded] = useState(false);
 
   const markCell = (squareIndex, mark) => {
-    if (ended === true || game === "") {
+    if (ended || game === "") {
       return false;
     }
     squares[squareIndex] = mark;
@@ -164,7 +164,7 @@ export const Grid = () => {
   };
 
   const handleClick = (squareIndex) => {
-    if (ended === true || turn === "") {
+    if (ended || turn === "") {
       return;
     }
     if (squares[squareIndex] === "") {
@@ -204,7 +204,7 @@ export const Grid = () => {
   };
 
   const computerMove = () => {
-    if (ended === true) {
+    if (ended) {
       return;
     }
 
