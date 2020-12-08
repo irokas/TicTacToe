@@ -76,7 +76,31 @@ export const declareWinner = (squares) => {
   }
   return "";
 };
-
+const minimax = (isCPUturn, board) => {
+  let newBoard = board.slice();
+  const emptyCells = findEmptyCells(board);
+  const winner = declareWinner(board);
+  if (winner === "X") {
+    return -1;
+  }
+  if (winner === "O") {
+    return 1;
+  }
+  if (declareTie(board)) {
+    return 0;
+  }
+  let scores = [];
+  const nextTurn = isCPUturn ? "O" : "X";
+  for (let i = 0; i < emptyCells.length; i++) {
+    newBoard[emptyCells[i]] = nextTurn;
+    scores.push(minimax(!isCPUturn, newBoard));
+    newBoard[emptyCells[i]] = "";
+  }
+  if (isCPUturn) {
+    return Math.max(...scores);
+  }
+  return Math.min(...scores);
+};
 export const Grid = () => {
   const [turn, setTurn] = useState("");
   const [squares, setSquares] = useState(Array(9).fill(""));
@@ -143,31 +167,6 @@ export const Grid = () => {
       }
     }
     markCell(bestMove, "O");
-  };
-  const minimax = (isCPUturn, board) => {
-    let newBoard = board.slice();
-    const emptyCells = findEmptyCells(board);
-    const winner = declareWinner(board);
-    if (winner === "X") {
-      return -1;
-    }
-    if (winner === "O") {
-      return 1;
-    }
-    if (declareTie(board)) {
-      return 0;
-    }
-    let scores = [];
-    const nextTurn = isCPUturn ? "O" : "X";
-    for (let i = 0; i < emptyCells.length; i++) {
-      newBoard[emptyCells[i]] = nextTurn;
-      scores.push(minimax(!isCPUturn, newBoard));
-      newBoard[emptyCells[i]] = "";
-    }
-    if (isCPUturn) {
-      return Math.max(...scores);
-    }
-    return Math.min(...scores);
   };
   const computerMove = () => {
     if (ended === true) {
