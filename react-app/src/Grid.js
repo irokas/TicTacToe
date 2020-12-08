@@ -173,7 +173,7 @@ export const Grid = () => {
       return;
     }
 
-    setTimeout(makeBestMove, 500);
+    setTimeout(makeBestMove, 200);
   };
 
   const gameChange = (newGame, newTurn, newTitle) => {
