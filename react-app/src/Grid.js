@@ -90,7 +90,7 @@ export const declareWinner = (squares) => {
   return "";
 };
 
-export const minimax = (isCPUturn, board, depth) => {
+export const minimax = (isCPUturn, board, depth, alpha, beta) => {
   let newBoard = board.slice();
 
   const emptyCells = findEmptyCells(board);
@@ -109,16 +109,19 @@ export const minimax = (isCPUturn, board, depth) => {
   const nextTurn = isCPUturn ? "O" : "X";
   for (let i = 0; i < emptyCells.length; i += 1) {
     newBoard[emptyCells[i]] = nextTurn;
-    const score = minimax(!isCPUturn, newBoard, depth + 1);
+    const score = minimax(!isCPUturn, newBoard, depth + 1, alpha, beta);
     scores.push(score);
+    newBoard[emptyCells[i]] = "";
     if (isCPUturn) {
-      if (score > 0) {
-        break;
+      if (score > alpha) {
+        alpha = score;
       }
-    } else if (score < 0) {
+    } else if (score < beta) {
+      beta = score;
+    }
+    if (alpha >= beta) {
       break;
     }
-    newBoard[emptyCells[i]] = "";
   }
   if (isCPUturn) {
     return Math.max(...scores);
@@ -184,22 +187,21 @@ export const Grid = () => {
   };
 
   const makeBestMove = () => {
-    let bestScore = -2;
-    let bestMove = -1;
+    let bestScore = -Infinity;
+    let bestMove;
     let newBoard = squares.slice();
 
     const emptyCells = findEmptyCells(squares);
 
-    emptyCells.forEach((emptyCell) => {
-      newBoard[emptyCell] = "O";
-      const score = minimax(false, newBoard, 0);
-      newBoard[emptyCell] = "";
+    for (let i = 0; i < emptyCells.length; i += 1) {
+      newBoard[emptyCells[i]] = "O";
+      const score = minimax(false, newBoard, 0, -Infinity, Infinity);
+      newBoard[emptyCells[i]] = "";
       if (score > bestScore) {
         bestScore = score;
-        bestMove = emptyCell;
+        bestMove = emptyCells[i];
       }
-    });
-
+    }
     markCell(bestMove, "O");
   };
 
