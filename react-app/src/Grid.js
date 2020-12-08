@@ -76,7 +76,7 @@ export const declareWinner = (squares) => {
   }
   return "";
 };
-const minimax = (isCPUturn, board) => {
+const minimax = (isCPUturn, board, depth) => {
   let newBoard = board.slice();
   const emptyCells = findEmptyCells(board);
   const winner = declareWinner(board);
@@ -84,7 +84,7 @@ const minimax = (isCPUturn, board) => {
     return -1;
   }
   if (winner === "O") {
-    return 1;
+    return 1 / depth;
   }
   if (declareTie(board)) {
     return 0;
@@ -93,7 +93,7 @@ const minimax = (isCPUturn, board) => {
   const nextTurn = isCPUturn ? "O" : "X";
   for (let i = 0; i < emptyCells.length; i++) {
     newBoard[emptyCells[i]] = nextTurn;
-    scores.push(minimax(!isCPUturn, newBoard));
+    scores.push(minimax(!isCPUturn, newBoard, depth + 1));
     newBoard[emptyCells[i]] = "";
   }
   if (isCPUturn) {
@@ -159,7 +159,7 @@ export const Grid = () => {
     const emptyCells = findEmptyCells(squares);
     for (let i = 0; i < emptyCells.length; i++) {
       newBoard[emptyCells[i]] = "O";
-      const score = minimax(false, newBoard);
+      const score = minimax(false, newBoard, 0);
       newBoard[emptyCells[i]] = "";
       if (score > bestScore) {
         bestScore = score;
