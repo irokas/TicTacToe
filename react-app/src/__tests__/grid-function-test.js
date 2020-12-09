@@ -38,10 +38,10 @@ describe("Tests the functions inside Grid.js", () => {
   //  declareWinner tests
   it("should not declare winner", () => {
     const notWinnerTests = ["X", "O", "X", "X", "O", "X", "O", "X", "O"];
-    expect(gridJs.declareWinner(notWinnerTests)).toBe("");
+    expect(gridJs.checkWinner(notWinnerTests)).toBe("");
   });
   it("should declare winner", () => {
     const xWinnerSquares = ["X", "O", "X", "O", "O", "X", "O", "X", "X"];
-    expect(gridJs.declareWinner(xWinnerSquares)).toBe("X");
+    expect(gridJs.checkWinner(xWinnerSquares)).toBe("X");
   });
 });

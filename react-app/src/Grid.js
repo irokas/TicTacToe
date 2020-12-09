@@ -124,12 +124,11 @@ export const Grid = () => {
       if (!markCell(squareIndex, "X")) {
         return;
       }
-    } else if (!markCell(squareIndex, turn)) {
+      computerMove();
+
       return;
     }
-    if (game === "PvC") {
-      computerMove();
-    }
+    markCell(squareIndex, turn);
   };
 
   const makeBestMove = () => {
