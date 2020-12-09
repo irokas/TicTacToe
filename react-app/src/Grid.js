@@ -14,11 +14,7 @@ export const findEmptyCells = (squares) => {
 };
 
 export const declareTie = (squares) => {
-  if (findEmptyCells(squares).length === 0) {
-    return true;
-  }
-
-  return false;
+  return findEmptyCells(squares).length === 0;
 };
 
 export const declareWinner = (squares) => {
