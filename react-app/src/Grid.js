@@ -65,11 +65,9 @@ export const minimax = (isCPUturn, board, depth, alpha, beta) => {
     scores.push(score);
     newBoard[emptyCells[i]] = "";
     if (isCPUturn) {
-      if (score > alpha) {
-        alpha = score;
-      }
-    } else if (score < beta) {
-      beta = score;
+      alpha = Math.max(score, alpha);
+    } else {
+      beta = Math.min(score, beta);
     }
     if (alpha >= beta) {
       break;
