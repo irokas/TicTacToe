@@ -75,11 +75,8 @@ export const minimax = (isCPUturn, board, depth, alpha, beta) => {
       break;
     }
   }
-  if (isCPUturn) {
-    return Math.max(...scores);
-  }
 
-  return Math.min(...scores);
+  return isCPUturn ? Math.max(...scores) : Math.min(...scores);
 };
 
 export const Grid = () => {
@@ -103,19 +100,20 @@ export const Grid = () => {
     setTitle(`Next Player: ${next}`);
 
     if (checkWinner(squares) !== "") {
-      setTitle(`WINNER: ${mark}`);
-      setEnded(true);
-
-      return false;
+      return gameOver(`WINNER: ${mark}`);
     }
     if (declareTie(squares)) {
-      setTitle("IT'S A TIE");
-      setEnded(true);
-
-      return false;
+      return gameOver("IT'S A TIE");
     }
 
     return true;
+  };
+
+  const gameOver = (newTitle) => {
+    setTitle(newTitle);
+    setEnded(true);
+
+    return false;
   };
 
   const handleClick = (squareIndex) => {
