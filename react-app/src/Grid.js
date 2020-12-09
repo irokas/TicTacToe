@@ -17,70 +17,26 @@ export const declareTie = (squares) => {
   return findEmptyCells(squares).length === 0;
 };
 
-export const declareWinner = (squares) => {
-  // first row
-  if (
-    squares[0] === squares[1] &&
-    squares[1] === squares[2] &&
-    squares[0] !== ""
-  ) {
-    return squares[0];
-  }
-  // second row
-  if (
-    squares[3] === squares[4] &&
-    squares[3] === squares[5] &&
-    squares[3] !== ""
-  ) {
-    return squares[3];
-  }
-  // third row
-  if (
-    squares[6] === squares[7] &&
-    squares[6] === squares[8] &&
-    squares[6] !== ""
-  ) {
-    return squares[6];
-  }
-  // first column
-  if (
-    squares[0] === squares[3] &&
-    squares[0] === squares[6] &&
-    squares[0] !== ""
-  ) {
-    return squares[0];
-  }
-  // second column
-  if (
-    squares[1] === squares[4] &&
-    squares[1] === squares[7] &&
-    squares[1] !== ""
-  ) {
-    return squares[1];
-  }
-  // third column
-  if (
-    squares[2] === squares[5] &&
-    squares[2] === squares[8] &&
-    squares[2] !== ""
-  ) {
-    return squares[2];
-  }
-  // first diagonal
-  if (
-    squares[0] === squares[4] &&
-    squares[0] === squares[8] &&
-    squares[0] !== ""
-  ) {
-    return squares[0];
-  }
-  // second diagonal
-  if (
-    squares[2] === squares[4] &&
-    squares[2] === squares[6] &&
-    squares[2] !== ""
-  ) {
-    return squares[2];
+export const checkWinner = (squares) => {
+  const winnerCombinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < 8; i += 1) {
+    let combination = winnerCombinations[i];
+    if (
+      squares[combination[0]] === squares[combination[1]] &&
+      squares[combination[1]] === squares[combination[2]] &&
+      squares[combination[0]] !== ""
+    ) {
+      return squares[combination[0]];
+    }
   }
 
   return "";
@@ -90,7 +46,7 @@ export const minimax = (isCPUturn, board, depth, alpha, beta) => {
   let newBoard = board.slice();
 
   const emptyCells = findEmptyCells(board);
-  const winner = declareWinner(board);
+  const winner = checkWinner(board);
 
   if (winner === "X") {
     return -1;
@@ -146,7 +102,7 @@ export const Grid = () => {
     const next = mark === "X" ? "O" : "X";
     setTitle(`Next Player: ${next}`);
 
-    if (declareWinner(squares) !== "") {
+    if (checkWinner(squares) !== "") {
       setTitle(`WINNER: ${mark}`);
       setEnded(true);
 
