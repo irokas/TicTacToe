@@ -117,18 +117,14 @@ export const Grid = () => {
   };
 
   const handleClick = (squareIndex) => {
-    if (ended || turn === "") {
+    if (ended || turn === "" || !(squares[squareIndex] === "")) {
       return;
     }
-    if (squares[squareIndex] === "") {
-      if (game === "PvC") {
-        if (!markCell(squareIndex, "X")) {
-          return;
-        }
-      } else if (!markCell(squareIndex, turn)) {
+    if (game === "PvC") {
+      if (!markCell(squareIndex, "X")) {
         return;
       }
-    } else {
+    } else if (!markCell(squareIndex, turn)) {
       return;
     }
     if (game === "PvC") {
