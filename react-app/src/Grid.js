@@ -172,7 +172,6 @@ export const Grid = () => {
     setSquares(Array(9).fill(""));
     setGame(newGame);
     setTitle(newTitle);
-    setEnded(false);
     setMarkClass(newClass);
   };
 
@@ -181,6 +180,7 @@ export const Grid = () => {
     setComputerMark(newComputer);
     setTitle(`Next Player: ${newTurn}`);
     setMarkClass("not");
+    setEnded(false);
   };
 
   return (
