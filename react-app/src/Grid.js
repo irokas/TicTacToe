@@ -91,8 +91,8 @@ export const Grid = () => {
   const [title, setTitle] = useState("Choose Type of Game");
   const [game, setGame] = useState("");
   const [ended, setEnded] = useState(false);
-  const computerMark = "O";
-  const [markStyle, setMarkStyle] = useState("not");
+  const [computerMark, setComputerMark] = useState("");
+  const [markClass, setMarkClass] = useState("not");
 
   const markCell = (squareIndex, mark) => {
     if (ended || game === "") {
@@ -168,40 +168,43 @@ export const Grid = () => {
     }, 200);
   };
 
-  const gameChange = (newGame, newTurn, newTitle) => {
+  const gameChange = (newGame, newTitle, newClass) => {
     setSquares(Array(9).fill(""));
     setGame(newGame);
-    setTurn(newTurn);
     setTitle(newTitle);
     setEnded(false);
-    setMarkStyle(markStyle - "not");
+    setMarkClass(newClass);
+  };
+
+  const chooseMark = (newTurn, newComputer) => {
+    setTurn(newTurn);
+    setComputerMark(newComputer);
+    setTitle(`Next Player: ${newTurn}`);
+    setMarkClass("not");
   };
 
   return (
     <table className="grid">
-      <h1 id="title">{title}</h1>
-      <h2>
-        Choose mark:
-        <button className={markStyle}>X</button>
-        <button className={markStyle}>O</button>
-      </h2>
+      <h1 id="title">
+        {title}
+        <button className={markClass} onClick={() => chooseMark("X", "O")}>
+          X
+        </button>
+        <button className={markClass} onClick={() => chooseMark("O", "X")}>
+          O
+        </button>
+      </h1>
       <div>
         <button
           id="reset"
-          onClick={() => gameChange("", "", "Choose Type of Game")}
+          onClick={() => gameChange("", "Choose Type of Game", "not")}
         >
           Reset
         </button>
-        <button
-          id="PvP"
-          onClick={() => gameChange("PvP", "X", "Next Player: X")}
-        >
+        <button id="PvP" onClick={() => gameChange("PvP", "Choose Mark", "")}>
           Person vs Person
         </button>
-        <button
-          id="PvC"
-          onClick={() => gameChange("PvC", "X", "Next Player: X")}
-        >
+        <button id="PvC" onClick={() => gameChange("PvC", "Choose Mark", "")}>
           Person vs Computer
         </button>
       </div>
