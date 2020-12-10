@@ -98,13 +98,6 @@ export const Grid = () => {
       return false;
     }
     squares[squareIndex] = mark;
-    if (mark === "X") {
-      setTurn("O");
-    } else {
-      setTurn("X");
-    }
-    const next = mark === "X" ? "O" : "X";
-    setTitle(`Next Player: ${next}`);
 
     if (checkWinner(squares) !== "") {
       return gameOver(`WINNER: ${mark}`);
@@ -112,6 +105,15 @@ export const Grid = () => {
     if (declareTie(squares)) {
       return gameOver("IT'S A TIE");
     }
+
+    if (mark === "X") {
+      setTurn("O");
+    } else {
+      setTurn("X");
+    }
+
+    const next = mark === "X" ? "O" : "X";
+    setTitle(`Next Player: ${next}`);
 
     return true;
   };
@@ -127,15 +129,13 @@ export const Grid = () => {
     if (ended || turn === "" || !(squares[squareIndex] === "")) {
       return;
     }
+    const markCellCall = markCell(squareIndex, turn);
     if (game === "PvC") {
-      if (!markCell(squareIndex, turn)) {
+      if (!markCellCall) {
         return;
       }
       computerMove();
-
-      return;
     }
-    markCell(squareIndex, turn);
   };
 
   const makeBestMove = () => {
