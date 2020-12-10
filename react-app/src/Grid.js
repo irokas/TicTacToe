@@ -134,11 +134,11 @@ export const Grid = () => {
       if (!markCellCall) {
         return;
       }
-      computerMove();
+      computerMove(computerMark);
     }
   };
 
-  const makeBestMove = () => {
+  const makeBestMove = (mark) => {
     let bestScore = -Infinity;
     let bestMove;
     let newBoard = squares.slice();
@@ -146,31 +146,24 @@ export const Grid = () => {
     const emptyCells = findEmptyCells(squares);
 
     for (let i = 0; i < emptyCells.length; i += 1) {
-      newBoard[emptyCells[i]] = computerMark;
-      const score = minimax(
-        false,
-        newBoard,
-        0,
-        -Infinity,
-        Infinity,
-        computerMark
-      );
+      newBoard[emptyCells[i]] = mark;
+      const score = minimax(false, newBoard, 0, -Infinity, Infinity, mark);
       newBoard[emptyCells[i]] = "";
       if (score > bestScore) {
         bestScore = score;
         bestMove = emptyCells[i];
       }
     }
-    markCell(bestMove, computerMark);
+    markCell(bestMove, mark);
   };
 
-  const computerMove = () => {
+  const computerMove = (mark) => {
     if (ended) {
       return;
     }
 
     setTimeout(() => {
-      makeBestMove(computerMark);
+      makeBestMove(mark);
     }, 200);
   };
 
