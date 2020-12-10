@@ -42,7 +42,7 @@ export const checkWinner = (squares) => {
   return "";
 };
 
-export const minimax = (isCPUturn, board, depth, alpha, beta, maxMark) => {
+export const minimax = (isMAXturn, board, depth, alpha, beta, maxMark) => {
   const minMark = maxMark === "O" ? "X" : "O";
   let newBoard = board.slice();
 
@@ -59,11 +59,11 @@ export const minimax = (isCPUturn, board, depth, alpha, beta, maxMark) => {
     return 0;
   }
   let scores = [];
-  const nextTurn = isCPUturn ? maxMark : minMark;
+  const nextTurn = isMAXturn ? maxMark : minMark;
   for (let i = 0; i < emptyCells.length; i += 1) {
     newBoard[emptyCells[i]] = nextTurn;
     const score = minimax(
-      !isCPUturn,
+      !isMAXturn,
       newBoard,
       depth + 1,
       alpha,
@@ -72,7 +72,7 @@ export const minimax = (isCPUturn, board, depth, alpha, beta, maxMark) => {
     );
     scores.push(score);
     newBoard[emptyCells[i]] = "";
-    if (isCPUturn) {
+    if (isMAXturn) {
       alpha = Math.max(score, alpha);
     } else {
       beta = Math.min(score, beta);
@@ -82,7 +82,7 @@ export const minimax = (isCPUturn, board, depth, alpha, beta, maxMark) => {
     }
   }
 
-  return isCPUturn ? Math.max(...scores) : Math.min(...scores);
+  return isMAXturn ? Math.max(...scores) : Math.min(...scores);
 };
 
 export const Grid = () => {
