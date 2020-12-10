@@ -168,11 +168,12 @@ export const Grid = () => {
     }, 200);
   };
 
-  const gameChange = (newGame, newTitle, newClass) => {
+  const gameChange = (newGame, newTitle) => {
+    setEnded(true);
     setSquares(Array(9).fill(""));
     setGame(newGame);
     setTitle(newTitle);
-    setMarkClass(newClass);
+    setMarkClass("");
   };
 
   const gameStart = (newTurn, newComputer) => {
