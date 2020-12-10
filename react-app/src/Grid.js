@@ -185,7 +185,7 @@ export const Grid = () => {
 
   return (
     <table className="grid">
-      <h1 id="title" style={{ display: "flex" }}>
+      <h1 id="title">
         {title}
         <div className={markClass}>
           <button id="markX" onClick={() => gameStart("X", "O")}>

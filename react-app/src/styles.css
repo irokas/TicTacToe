@@ -27,3 +27,7 @@ button {
 .not {
   display: none;
 }
+#title {
+  display: flex;
+  align-items: center;
+}
