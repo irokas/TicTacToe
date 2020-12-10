@@ -185,14 +185,16 @@ export const Grid = () => {
 
   return (
     <table className="grid">
-      <h1 id="title">
+      <h1 id="title" style={{ display: "flex" }}>
         {title}
-        <button className={markClass} onClick={() => chooseMark("X", "O")}>
-          X
-        </button>
-        <button className={markClass} onClick={() => chooseMark("O", "X")}>
-          O
-        </button>
+        <div className={markClass}>
+          <button id="markX" onClick={() => chooseMark("X", "O")}>
+            X
+          </button>
+          <button id="markO" onClick={() => chooseMark("O", "X")}>
+            O
+          </button>
+        </div>
       </h1>
       <div>
         <button

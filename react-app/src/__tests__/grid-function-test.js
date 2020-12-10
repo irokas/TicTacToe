@@ -12,6 +12,7 @@ const gridJs = require("../Grid.js");
 describe("Tests the functions inside Grid.js", () => {
   it("should call setTimeout", () => {
     grid.find("#PvC").simulate("click");
+    grid.find("#markX").simulate("click");
     grid.find(Square).at(1).simulate("click");
 
     expect(setTimeout).toHaveBeenCalledTimes(1);

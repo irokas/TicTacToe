@@ -11,7 +11,14 @@ describe("Test the minimax algorithm", () => {
 
     for (let i = 0; i < emptyCells.length; i += 1) {
       newBoard[emptyCells[i]] = "O";
-      const score = gridJs.minimax(false, newBoard, 0);
+      const score = gridJs.minimax(
+        false,
+        newBoard,
+        0,
+        -Infinity,
+        Infinity,
+        "O"
+      );
       newBoard[emptyCells[i]] = "";
       if (score > bestScore) {
         bestScore = score;
@@ -30,7 +37,14 @@ describe("Test the minimax algorithm", () => {
 
     for (let i = 0; i < emptyCells.length; i += 1) {
       newBoard[emptyCells[i]] = "O";
-      const score = gridJs.minimax(false, newBoard, 0);
+      const score = gridJs.minimax(
+        false,
+        newBoard,
+        0,
+        -Infinity,
+        Infinity,
+        "O"
+      );
       newBoard[emptyCells[i]] = "";
       if (score > bestScore) {
         bestScore = score;

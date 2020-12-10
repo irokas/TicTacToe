@@ -3,11 +3,9 @@ import { shallow } from "enzyme";
 
 import { Square } from "../Square";
 
-describe("Square test", function () {
+describe("Square test", () => {
   it("should render without throwing an error", () => {
-    expect(shallow(<Square />).contains(<td className="square"></td>)).toBe(
-      true
-    );
+    expect(shallow(<Square />).contains(<td className="square" />)).toBe(true);
   });
 
   it('should be selectable by class "square"', () => {

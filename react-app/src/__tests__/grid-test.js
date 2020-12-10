@@ -20,21 +20,22 @@ describe("Grid test", () => {
     grid.find(Square).map((square) => expect(square.prop("turn")).toBe(""));
   });
   it("h1 should be choose type of game", () => {
-    expect(grid.childAt(0).text()).toBe("Choose Type of Game");
+    expect(grid.childAt(0).text()).toBe("Choose Type of GameXO");
   });
   it("check square value after first click", () => {
     grid.find("#PvP").simulate("click");
+    grid.find("#markX").simulate("click");
     grid.find(Square).at(1).simulate("click");
     expect(grid.find(Square).at(1).prop("turn")).toBe("X");
   });
   it("next turn should be O", () => {
-    expect(grid.childAt(0).text()).toBe("Next Player: O");
+    expect(grid.childAt(0).text()).toContain("Next Player: O");
   });
   it("check square value after second click", () => {
     grid.find(Square).at(4).simulate("click");
     expect(grid.find(Square).at(4).prop("turn")).toBe("O");
   });
   it("next turn should be x again", () => {
-    expect(grid.childAt(0).text()).toBe("Next Player: X");
+    expect(grid.childAt(0).text()).toContain("Next Player: X");
   });
 });
