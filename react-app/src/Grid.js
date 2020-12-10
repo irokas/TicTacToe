@@ -199,14 +199,14 @@ export const Grid = () => {
       <div>
         <button
           id="reset"
-          onClick={() => gameChange("", "Choose Type of Game", "not")}
+          onClick={() => gameChange("", "Choose Type of Game")}
         >
           Reset
         </button>
-        <button id="PvP" onClick={() => gameChange("PvP", "Choose Mark", "")}>
+        <button id="PvP" onClick={() => gameChange("PvP", "Choose Mark")}>
           Person vs Person
         </button>
-        <button id="PvC" onClick={() => gameChange("PvC", "Choose Mark", "")}>
+        <button id="PvC" onClick={() => gameChange("PvC", "Choose Mark")}>
           Person vs Computer
         </button>
       </div>
