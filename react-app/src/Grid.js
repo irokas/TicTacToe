@@ -175,7 +175,7 @@ export const Grid = () => {
     setMarkClass(newClass);
   };
 
-  const chooseMark = (newTurn, newComputer) => {
+  const gameStart = (newTurn, newComputer) => {
     setTurn(newTurn);
     setComputerMark(newComputer);
     setTitle(`Next Player: ${newTurn}`);
@@ -188,10 +188,10 @@ export const Grid = () => {
       <h1 id="title" style={{ display: "flex" }}>
         {title}
         <div className={markClass}>
-          <button id="markX" onClick={() => chooseMark("X", "O")}>
+          <button id="markX" onClick={() => gameStart("X", "O")}>
             X
           </button>
-          <button id="markO" onClick={() => chooseMark("O", "X")}>
+          <button id="markO" onClick={() => gameStart("O", "X")}>
             O
           </button>
         </div>
