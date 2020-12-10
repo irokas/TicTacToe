@@ -92,6 +92,7 @@ export const Grid = () => {
   const [game, setGame] = useState("");
   const [ended, setEnded] = useState(false);
   const computerMark = "O";
+  const [markStyle, setMarkStyle] = useState("not");
 
   const markCell = (squareIndex, mark) => {
     if (ended || game === "") {
@@ -173,11 +174,17 @@ export const Grid = () => {
     setTurn(newTurn);
     setTitle(newTitle);
     setEnded(false);
+    setMarkStyle(markStyle - "not");
   };
 
   return (
     <table className="grid">
       <h1 id="title">{title}</h1>
+      <h2>
+        Choose mark:
+        <button className={markStyle}>X</button>
+        <button className={markStyle}>O</button>
+      </h2>
       <div>
         <button
           id="reset"
