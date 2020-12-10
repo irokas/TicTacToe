@@ -99,7 +99,6 @@ export const Grid = () => {
       return false;
     }
     squares[squareIndex] = mark;
-
     if (checkWinner(squares) !== "") {
       return gameOver(`WINNER: ${mark}`);
     }
@@ -128,6 +127,11 @@ export const Grid = () => {
 
   const handleClick = (squareIndex) => {
     if (ended || turn === "" || !(squares[squareIndex] === "")) {
+      return;
+    }
+    if (game === "CvC") {
+      computerVsComputer("X");
+
       return;
     }
     const markCellCall = markCell(squareIndex, turn);
@@ -168,6 +172,14 @@ export const Grid = () => {
     }, 200);
   };
 
+  const computerVsComputer = (mark) => {
+    let player = mark;
+    for (let i = 0; i < 9; i += 1) {
+      computerMove(player);
+      player = player === "X" ? "O" : "X";
+    }
+  };
+
   const gameChange = (newGame, newTitle) => {
     setEnded(true);
     setSquares(Array(9).fill(""));
@@ -179,7 +191,11 @@ export const Grid = () => {
   const gameStart = (newTurn, newComputer) => {
     setTurn(newTurn);
     setComputerMark(newComputer);
-    setTitle(`Next Player: ${newTurn}`);
+    if (!(game === "CvC")) {
+      setTitle(`Next Player: ${newTurn}`);
+    } else {
+      setTitle("Press Anywhere to Start");
+    }
     setMarkClass("not");
     setEnded(false);
   };
@@ -209,6 +225,9 @@ export const Grid = () => {
         </button>
         <button id="PvC" onClick={() => gameChange("PvC", "Choose Mark")}>
           Person vs Computer
+        </button>
+        <button id="CvC" onClick={() => gameChange("CvC", "Choose Mark")}>
+          Computer vs Computer
         </button>
       </div>
 
