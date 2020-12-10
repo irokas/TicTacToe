@@ -94,16 +94,15 @@ export const Grid = () => {
   const computerMark = "O";
 
   const markCell = (squareIndex, mark) => {
-    const squaresCopy = squares.slice();
     if (ended || game === "") {
       return false;
     }
-    squaresCopy[squareIndex] = mark;
-    setSquares(squaresCopy);
-    if (checkWinner(squaresCopy) !== "") {
+    squares[squareIndex] = mark;
+
+    if (checkWinner(squares) !== "") {
       return gameOver(`WINNER: ${mark}`);
     }
-    if (declareTie(squaresCopy)) {
+    if (declareTie(squares)) {
       return gameOver("IT'S A TIE");
     }
 
