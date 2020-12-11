@@ -128,7 +128,7 @@ export const Grid = () => {
         computerMove(turn);
       }, 200);
     }
-  }, [turn]);
+  }, [turn, game, ended]);
 
   const markCell = (squareIndex, mark) => {
     let newBoard = squares.slice();
@@ -150,11 +150,6 @@ export const Grid = () => {
 
   const handleClick = (squareIndex) => {
     if (ended || turn === "" || !(squares[squareIndex] === "")) {
-      return;
-    }
-    if (game === "CvC") {
-      computerMove(turn);
-
       return;
     }
     markCell(squareIndex, turn);
@@ -201,6 +196,7 @@ export const Grid = () => {
   };
 
   const gameStart = (newTurn) => {
+    setClicked(false);
     setTurn(newTurn);
     if (!(game === "CvC")) {
       setTitle(`Next Player: ${newTurn}`);
