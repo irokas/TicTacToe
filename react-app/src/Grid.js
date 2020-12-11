@@ -91,7 +91,6 @@ export const Grid = () => {
   const [title, setTitle] = useState("Choose Type of Game");
   const [game, setGame] = useState("");
   const [ended, setEnded] = useState(true);
-  const [computerMark, setComputerMark] = useState("");
   const [markClass, setMarkClass] = useState("not");
   const [winner, setWinner] = useState("");
   const [clicked, setClicked] = useState(false);
@@ -119,14 +118,14 @@ export const Grid = () => {
       }
     }
 
-    if (game === "PvC" && clicked) {
-      computerMove(computerMark);
-      setClicked(false);
-    }
-
     return true;
   }, [squares, winner]);
-
+  useEffect(() => {
+    if (game === "PvC" && clicked) {
+      computerMove(turn);
+      setClicked(false);
+    }
+  }, [turn]);
   useEffect(() => {
     if (game === "CvC") {
       const mark = turn === "X" ? "O" : "X";
@@ -204,9 +203,8 @@ export const Grid = () => {
     }
   };
 
-  const gameStart = (newTurn, newComputer) => {
+  const gameStart = (newTurn) => {
     setTurn(newTurn);
-    setComputerMark(newComputer);
     if (!(game === "CvC")) {
       setTitle(`Next Player: ${newTurn}`);
     } else {
@@ -221,10 +219,10 @@ export const Grid = () => {
       <h1 id="title">
         {title}
         <div className={markClass}>
-          <button id="markX" onClick={() => gameStart("X", "O")}>
+          <button id="markX" onClick={() => gameStart("X")}>
             X
           </button>
-          <button id="markO" onClick={() => gameStart("O", "X")}>
+          <button id="markO" onClick={() => gameStart("O")}>
             O
           </button>
         </div>
