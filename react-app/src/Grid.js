@@ -92,19 +92,14 @@ export const Grid = () => {
   const [game, setGame] = useState("");
   const [ended, setEnded] = useState(true);
   const [markClass, setMarkClass] = useState("not");
-  const [winner, setWinner] = useState("");
   const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     const win = checkWinner(squares);
     if (win !== "") {
-      setWinner(win);
-
-      return gameOver(`WINNER: ${winner}`);
+      return gameOver(`WINNER: ${win}`);
     }
     if (declareTie(squares)) {
-      setWinner("tie");
-
       return gameOver("IT'S A TIE");
     }
     if (!ended) {
@@ -119,7 +114,7 @@ export const Grid = () => {
     }
 
     return true;
-  }, [squares, winner]);
+  }, [squares]);
 
   useEffect(() => {
     if (game === "PvC" && clicked) {
