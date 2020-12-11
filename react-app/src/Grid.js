@@ -103,14 +103,8 @@ export const Grid = () => {
       return gameOver("IT'S A TIE");
     }
     if (!ended) {
-      if (turn === "X") {
-        setTitle("Next Player: O");
-
-        setTurn("O");
-      } else {
-        setTitle("Next Player: X");
-        setTurn("X");
-      }
+      const mark = turn === "X" ? "O" : "X";
+      setTitleAndTurn(mark);
     }
 
     return true;
@@ -129,6 +123,11 @@ export const Grid = () => {
       }, 200);
     }
   }, [turn, game, ended]);
+  const setTitleAndTurn = (mark) => {
+    setTitle(`Next Player: ${mark}`);
+
+    setTurn(mark);
+  };
 
   const markCell = (squareIndex, mark) => {
     let newBoard = squares.slice();
