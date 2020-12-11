@@ -161,9 +161,7 @@ export const Grid = () => {
 
       return;
     }
-    if (game !== "CvC") {
-      markCell(squareIndex, turn);
-    }
+    markCell(squareIndex, turn);
     setClicked(true);
   };
 
