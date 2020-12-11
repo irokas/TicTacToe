@@ -135,13 +135,6 @@ export const Grid = () => {
     }
   }, [turn]);
 
-  // useEffect(() => {
-  //   if (game === "CvC") {
-  //     const mark = turn === "X" ? "O" : "X";
-  //     computerMove(mark);
-  //   }
-  // }, [squares]);
-
   const markCell = (squareIndex, mark) => {
     let newBoard = squares.slice();
     if (ended || game === "") {
