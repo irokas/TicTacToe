@@ -93,6 +93,7 @@ export const Grid = () => {
   const [ended, setEnded] = useState(true);
   const [markClass, setMarkClass] = useState("not");
   const [clicked, setClicked] = useState(false);
+  const [firstPlayerClass, setFirstPlayerClass] = useState("not");
 
   useEffect(() => {
     const win = checkWinner(squares);
@@ -179,6 +180,15 @@ export const Grid = () => {
     }, 200);
   };
 
+  const changeFirstPlayer = (firstPlayer) => {
+    if (firstPlayer === "C") {
+      const mark = turn === "X" ? "O" : "X";
+      setTurn(mark);
+      computerMove(mark);
+    }
+    setFirstPlayerClass("not");
+  };
+
   const gameChange = (newGame, newTitle) => {
     setEnded(true);
     setSquares(Array(9).fill(""));
@@ -194,8 +204,13 @@ export const Grid = () => {
   const gameStart = (newTurn) => {
     setClicked(false);
     setTurn(newTurn);
-    if (!(game === "CvC")) {
+    if (game === "CvC") {
+      setTitle("Starting the game");
+    } else if (game === "PvP") {
       setTitle(`Next Player: ${newTurn}`);
+    } else {
+      setTitle("Choose first player");
+      setFirstPlayerClass("");
     }
     setMarkClass("not");
     setEnded(false);
@@ -211,6 +226,14 @@ export const Grid = () => {
           </button>
           <button id="markO" onClick={() => gameStart("O")}>
             O
+          </button>
+        </div>
+        <div className={firstPlayerClass}>
+          <button id="Person" onClick={() => changeFirstPlayer("P")}>
+            Person
+          </button>
+          <button id="Computer" onClick={() => changeFirstPlayer("C")}>
+            Computer
           </button>
         </div>
       </h1>
