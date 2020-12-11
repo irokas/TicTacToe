@@ -97,17 +97,19 @@ export const Grid = () => {
   useEffect(() => {
     const win = checkWinner(squares);
     if (win !== "") {
-      return gameOver(`WINNER: ${win}`);
+      gameOver(`WINNER: ${win}`);
+
+      return;
     }
     if (declareTie(squares)) {
-      return gameOver("IT'S A TIE");
+      gameOver("IT'S A TIE");
+
+      return;
     }
     if (!ended) {
       const mark = turn === "X" ? "O" : "X";
       setTitleAndTurn(mark);
     }
-
-    return true;
   }, [squares]);
 
   useEffect(() => {
@@ -143,8 +145,6 @@ export const Grid = () => {
   const gameOver = (newTitle) => {
     setTitle(newTitle);
     setEnded(true);
-
-    return false;
   };
 
   const handleClick = (squareIndex) => {
