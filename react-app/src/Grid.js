@@ -114,15 +114,11 @@ export const Grid = () => {
 
   useEffect(() => {
     if (game === "PvC" && clicked) {
-      setTimeout(() => {
-        computerMove(turn);
-      }, 200);
+      computerMove(turn);
       setClicked(false);
     }
     if (game === "CvC") {
-      setTimeout(() => {
-        computerMove(turn);
-      }, 200);
+      computerMove(turn);
     }
   }, [turn, game, ended]);
   const setTitleAndTurn = (mark) => {
@@ -178,8 +174,9 @@ export const Grid = () => {
     if (ended) {
       return;
     }
-
-    makeBestMove(mark);
+    setTimeout(() => {
+      makeBestMove(mark);
+    }, 200);
   };
 
   const gameChange = (newGame, newTitle) => {
