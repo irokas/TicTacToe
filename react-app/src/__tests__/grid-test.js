@@ -29,13 +29,19 @@ describe("Grid test", () => {
     expect(grid.find(Square).at(1).prop("turn")).toBe("X");
   });
   it("next turn should be O", () => {
-    expect(grid.childAt(0).text()).toContain("Next Player: O");
+    setTimeout(() => {
+      expect(grid.childAt(0).text()).toContain("Next Player: O");
+    }, 1000);
   });
   it("check square value after second click", () => {
     grid.find(Square).at(4).simulate("click");
-    expect(grid.find(Square).at(4).prop("turn")).toBe("O");
+    setTimeout(() => {
+      expect(grid.find(Square).at(4).prop("turn")).toBe("O");
+    }, 1000);
   });
   it("next turn should be x again", () => {
-    expect(grid.childAt(0).text()).toContain("Next Player: X");
+    setTimeout(() => {
+      expect(grid.childAt(0).text()).toContain("Next Player: X");
+    }, 1000);
   });
 });
