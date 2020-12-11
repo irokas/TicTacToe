@@ -209,8 +209,6 @@ export const Grid = () => {
     setTurn(newTurn);
     if (!(game === "CvC")) {
       setTitle(`Next Player: ${newTurn}`);
-    } else {
-      setTitle("Press Anywhere to Start");
     }
     setMarkClass("not");
     setEnded(false);
