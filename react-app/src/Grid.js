@@ -120,18 +120,27 @@ export const Grid = () => {
 
     return true;
   }, [squares, winner]);
+
   useEffect(() => {
     if (game === "PvC" && clicked) {
-      computerMove(turn);
+      setTimeout(() => {
+        computerMove(turn);
+      }, 200);
       setClicked(false);
     }
-  }, [turn]);
-  useEffect(() => {
     if (game === "CvC") {
-      const mark = turn === "X" ? "O" : "X";
-      computerMove(mark);
+      setTimeout(() => {
+        computerMove(turn);
+      }, 200);
     }
-  }, [squares]);
+  }, [turn]);
+
+  // useEffect(() => {
+  //   if (game === "CvC") {
+  //     const mark = turn === "X" ? "O" : "X";
+  //     computerMove(mark);
+  //   }
+  // }, [squares]);
 
   const markCell = (squareIndex, mark) => {
     let newBoard = squares.slice();
