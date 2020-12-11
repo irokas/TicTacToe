@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Square } from "./Square";
 
 export const findEmptyCells = (squares) => {
@@ -90,32 +90,59 @@ export const Grid = () => {
   const [squares, setSquares] = useState(Array(9).fill(""));
   const [title, setTitle] = useState("Choose Type of Game");
   const [game, setGame] = useState("");
-  const [ended, setEnded] = useState(false);
+  const [ended, setEnded] = useState(true);
   const [computerMark, setComputerMark] = useState("");
   const [markClass, setMarkClass] = useState("not");
+  const [winner, setWinner] = useState("");
+  const [clicked, setClicked] = useState(false);
+
+  useEffect(() => {
+    const win = checkWinner(squares);
+    if (win !== "") {
+      setWinner(win);
+
+      return gameOver(`WINNER: ${winner}`);
+    }
+    if (declareTie(squares)) {
+      setWinner("tie");
+
+      return gameOver("IT'S A TIE");
+    }
+    if (!ended) {
+      if (turn === "X") {
+        setTitle("Next Player: O");
+
+        setTurn("O");
+      } else {
+        setTitle("Next Player: X");
+        setTurn("X");
+      }
+    }
+
+    if (game === "PvC" && clicked) {
+      computerMove(computerMark);
+      setClicked(false);
+    }
+
+    return true;
+  }, [squares, winner]);
+
+  useEffect(() => {
+    if (game === "CvC") {
+      const mark = turn === "X" ? "O" : "X";
+      computerMove(mark);
+    }
+  }, [squares]);
 
   const markCell = (squareIndex, mark) => {
+    let newBoard = squares.slice();
     if (ended || game === "") {
       return false;
     }
-    squares[squareIndex] = mark;
-    if (checkWinner(squares) !== "") {
-      return gameOver(`WINNER: ${mark}`);
-    }
-    if (declareTie(squares)) {
-      return gameOver("IT'S A TIE");
-    }
+    newBoard[squareIndex] = mark;
+    setSquares(newBoard);
 
-    if (mark === "X") {
-      setTurn("O");
-    } else {
-      setTurn("X");
-    }
-
-    const next = mark === "X" ? "O" : "X";
-    setTitle(`Next Player: ${next}`);
-
-    return true;
+    return newBoard;
   };
 
   const gameOver = (newTitle) => {
@@ -130,17 +157,14 @@ export const Grid = () => {
       return;
     }
     if (game === "CvC") {
-      computerVsComputer(turn);
+      computerMove(turn);
 
       return;
     }
-    const markCellCall = markCell(squareIndex, turn);
-    if (game === "PvC") {
-      if (!markCellCall) {
-        return;
-      }
-      computerMove(computerMark);
+    if (game !== "CvC") {
+      markCell(squareIndex, turn);
     }
+    setClicked(true);
   };
 
   const makeBestMove = (mark) => {
@@ -167,17 +191,7 @@ export const Grid = () => {
       return;
     }
 
-    setTimeout(() => {
-      makeBestMove(mark);
-    }, 200);
-  };
-
-  const computerVsComputer = (mark) => {
-    let player = mark;
-    for (let i = 0; i < 9; i += 1) {
-      computerMove(player);
-      player = player === "X" ? "O" : "X";
-    }
+    makeBestMove(mark);
   };
 
   const gameChange = (newGame, newTitle) => {
@@ -185,7 +199,11 @@ export const Grid = () => {
     setSquares(Array(9).fill(""));
     setGame(newGame);
     setTitle(newTitle);
-    setMarkClass("");
+    if (newGame === "") {
+      setMarkClass("not");
+    } else {
+      setMarkClass("");
+    }
   };
 
   const gameStart = (newTurn, newComputer) => {

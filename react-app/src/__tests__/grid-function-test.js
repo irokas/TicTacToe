@@ -5,18 +5,10 @@ import { Grid } from "../Grid";
 import { Square } from "../Square";
 
 jest.useFakeTimers();
-const grid = shallow(<Grid />);
 
 const gridJs = require("../Grid.js");
 
 describe("Tests the functions inside Grid.js", () => {
-  it("should call setTimeout", () => {
-    grid.find("#PvC").simulate("click");
-    grid.find("#markX").simulate("click");
-    grid.find(Square).at(1).simulate("click");
-
-    expect(setTimeout).toHaveBeenCalledTimes(1);
-  });
   //  findEmptyCells tests
   it("should test findEmptyCells called with an empty array with length = 9", () => {
     expect(gridJs.findEmptyCells(Array(9).fill("")).length).toBe(9);

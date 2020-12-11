@@ -20,7 +20,7 @@ describe("Grid test", () => {
     grid.find(Square).map((square) => expect(square.prop("turn")).toBe(""));
   });
   it("h1 should be choose type of game", () => {
-    expect(grid.childAt(0).text()).toBe("Choose Type of GameXO");
+    expect(grid.childAt(0).text()).toContain("Choose Type of Game");
   });
   it("check square value after first click", () => {
     grid.find("#PvP").simulate("click");
