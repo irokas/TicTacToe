@@ -130,7 +130,7 @@ export const Grid = () => {
       return;
     }
     if (game === "CvC") {
-      computerVsComputer("X");
+      computerVsComputer(turn);
 
       return;
     }
