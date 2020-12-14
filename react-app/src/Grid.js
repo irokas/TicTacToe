@@ -249,7 +249,7 @@ export const Grid = () => {
           </button>
         </div>
       </h1>
-      <div>
+      <div className="button-row">
         <button
           id="reset"
           onClick={() => gameChange("", "Choose Type of Game")}
