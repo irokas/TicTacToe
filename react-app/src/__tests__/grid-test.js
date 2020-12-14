@@ -20,7 +20,7 @@ describe("Grid test", () => {
   });
 
   it("check initial value of all squares", () => {
-    grid.find(Square).map((square) => expect(square.prop("turn")).toBeFalsy());
+    grid.find(Square).map((square) => expect(square.prop("value")).toBeFalsy());
   });
 
   it("Title should be choose type of game", () => {
@@ -33,7 +33,7 @@ describe("Grid test", () => {
     grid.find("#markX").simulate("click");
     grid.find(Square).at(1).simulate("click");
 
-    expect(grid.find(Square).at(1).prop("turn")).toBe("X");
+    expect(grid.find(Square).at(1).prop("value")).toBe("X");
   });
 
   it("next turn should be O", () => {
@@ -42,7 +42,7 @@ describe("Grid test", () => {
 
   it("check square value after second click", () => {
     grid.find(Square).at(4).simulate("click");
-    expect(grid.find(Square).at(4).prop("turn")).toBe("O");
+    expect(grid.find(Square).at(4).prop("value")).toBe("O");
   });
 
   it("next turn should be X", () => {

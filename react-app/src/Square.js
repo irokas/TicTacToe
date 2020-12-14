@@ -3,7 +3,7 @@ import React from "react";
 export const Square = (props) => {
   return (
     <td className="square" onClick={props.onClick}>
-      {props.turn}
+      {props.value}
     </td>
   );
 };

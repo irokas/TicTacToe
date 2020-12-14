@@ -13,6 +13,6 @@ describe("test reset button", () => {
     grid.find(Square).at(0).simulate("click"); // O->0
     grid.find("#reset").simulate("click"); // Simulate click on reset button
 
-    grid.find(Square).map((square) => expect(square.prop("turn")).toBeFalsy());
+    grid.find(Square).map((square) => expect(square.prop("value")).toBeFalsy());
   });
 });

@@ -271,7 +271,7 @@ export const Grid = () => {
           return (
             <Square
               onClick={() => handleClick(key)}
-              turn={squares[key]}
+              value={squares[key]}
               key={key}
             />
           );
@@ -282,7 +282,7 @@ export const Grid = () => {
           return (
             <Square
               onClick={() => handleClick(key)}
-              turn={squares[key]}
+              value={squares[key]}
               key={key}
             />
           );
@@ -293,7 +293,7 @@ export const Grid = () => {
           return (
             <Square
               onClick={() => handleClick(key)}
-              turn={squares[key]}
+              value={squares[key]}
               key={key}
             />
           );
