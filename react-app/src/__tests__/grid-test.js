@@ -1,11 +1,12 @@
 import React from "react";
+//    import { act } from "react-dom/test-utils";
+
 import { shallow } from "enzyme";
 
 import { Grid } from "../Grid";
 import { Square } from "../Square";
 
 const grid = shallow(<Grid />);
-
 describe("Grid test", () => {
   it('should be selectable by class "grid"', () => {
     expect(grid.is(".grid")).toBe(true);
@@ -29,19 +30,13 @@ describe("Grid test", () => {
     expect(grid.find(Square).at(1).prop("turn")).toBe("X");
   });
   it("next turn should be O", () => {
-    setTimeout(() => {
-      expect(grid.childAt(0).text()).toContain("Next Player: O");
-    }, 1000);
+    expect(grid.childAt(0).text()).toContain("Next Player: O");
   });
   it("check square value after second click", () => {
     grid.find(Square).at(4).simulate("click");
-    setTimeout(() => {
-      expect(grid.find(Square).at(4).prop("turn")).toBe("O");
-    }, 1000);
+    expect(grid.find(Square).at(4).prop("turn")).toBe("O");
   });
   it("next turn should be x again", () => {
-    setTimeout(() => {
-      expect(grid.childAt(0).text()).toContain("Next Player: X");
-    }, 1000);
+    expect(grid.childAt(0).text()).toContain("Next Player: X");
   });
 });

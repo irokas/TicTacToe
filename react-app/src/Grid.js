@@ -96,6 +96,11 @@ export const Grid = () => {
   const [firstPlayer, setFirstPlayer] = useState("");
   const [firstPlayerClass, setFirstPlayerClass] = useState("not");
 
+  const setTitleAndTurn = (mark) => {
+    setTitle(`Next Player: ${mark}`);
+
+    setTurn(mark);
+  };
   useEffect(() => {
     const winner = checkWinner(squares);
     if (winner) {
@@ -123,11 +128,6 @@ export const Grid = () => {
       computerMove(turn);
     }
   }, [turn, game, ended]);
-  const setTitleAndTurn = (mark) => {
-    setTitle(`Next Player: ${mark}`);
-
-    setTurn(mark);
-  };
 
   const markCell = (squareIndex, mark) => {
     let newBoard = squares.slice();
