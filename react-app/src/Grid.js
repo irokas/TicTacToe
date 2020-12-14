@@ -101,6 +101,7 @@ export const Grid = () => {
 
     setTurn(mark);
   };
+
   useEffect(() => {
     const winner = checkWinner(squares);
     if (winner) {
@@ -124,6 +125,7 @@ export const Grid = () => {
       computerMove(turn);
       setClicked(false);
     }
+
     if (game === "CvC") {
       computerMove(turn);
     }
@@ -146,12 +148,7 @@ export const Grid = () => {
   };
 
   const handleClick = (squareIndex) => {
-    if (
-      ended ||
-      !turn ||
-      squares[squareIndex] ||
-      (game === "PvC" && !firstPlayer)
-    ) {
+    if (ended || squares[squareIndex] || (game === "PvC" && !firstPlayer)) {
       return;
     }
     markCell(squareIndex, turn);
@@ -201,6 +198,7 @@ export const Grid = () => {
   const gameChange = (newGame, newTitle) => {
     setEnded(true);
     setFirstPlayer("");
+    setFirstPlayerClass("not");
     setSquares(Array(9).fill(""));
     setGame(newGame);
     setTitle(newTitle);
