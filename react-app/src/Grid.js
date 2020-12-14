@@ -223,9 +223,7 @@ export const Grid = () => {
       setFirstPlayerClass("");
     }
     setMarkClass("not");
-    // if (game !== "PvC") {
     setEnded(false);
-    // }
   };
 
   return (
