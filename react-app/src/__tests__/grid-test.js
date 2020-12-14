@@ -58,5 +58,6 @@ describe("Grid test", () => {
     grid.find("#Computer").simulate("click");
 
     expect(setTimeout).toHaveBeenCalledTimes(1);
+    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 200);
   });
 });
