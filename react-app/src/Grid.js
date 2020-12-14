@@ -131,7 +131,7 @@ export const Grid = () => {
 
   const markCell = (squareIndex, mark) => {
     let newBoard = squares.slice();
-    if (ended || game === "") {
+    if (ended || !game) {
       return false;
     }
     newBoard[squareIndex] = mark;
@@ -148,9 +148,9 @@ export const Grid = () => {
   const handleClick = (squareIndex) => {
     if (
       ended ||
-      turn === "" ||
-      !(squares[squareIndex] === "") ||
-      (game === "PvC" && firstPlayer === "")
+      !turn ||
+      squares[squareIndex] ||
+      (game === "PvC" && !firstPlayer)
     ) {
       return;
     }
@@ -204,7 +204,7 @@ export const Grid = () => {
     setSquares(Array(9).fill(""));
     setGame(newGame);
     setTitle(newTitle);
-    if (newGame === "") {
+    if (!newGame) {
       setMarkClass("not");
     } else {
       setMarkClass("");
