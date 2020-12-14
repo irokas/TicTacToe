@@ -1,5 +1,3 @@
-jest.useFakeTimers();
-
 const gridJs = require("../Grid.js");
 
 describe("Tests the functions inside Grid.js", () => {
