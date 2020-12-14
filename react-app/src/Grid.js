@@ -102,6 +102,33 @@ export const Grid = () => {
     setTurn(mark);
   };
 
+  const makeBestMove = (mark) => {
+    let bestScore = -Infinity;
+    let bestMove;
+    let newBoard = squares.slice();
+
+    const emptyCells = findEmptyCells(squares);
+
+    for (let i = 0; i < emptyCells.length; i += 1) {
+      newBoard[emptyCells[i]] = mark;
+      const score = minimax(false, newBoard, 0, -Infinity, Infinity, mark);
+      newBoard[emptyCells[i]] = "";
+      if (score > bestScore) {
+        bestScore = score;
+        bestMove = emptyCells[i];
+      }
+    }
+    markCell(bestMove, mark);
+  };
+
+  const computerMove = (mark) => {
+    if (ended) {
+      return;
+    }
+    setTimeout(() => {
+      makeBestMove(mark);
+    }, 200);
+  };
   useEffect(() => {
     const winner = checkWinner(squares);
     if (winner) {
@@ -153,34 +180,6 @@ export const Grid = () => {
     }
     markCell(squareIndex, turn);
     setClicked(true);
-  };
-
-  const makeBestMove = (mark) => {
-    let bestScore = -Infinity;
-    let bestMove;
-    let newBoard = squares.slice();
-
-    const emptyCells = findEmptyCells(squares);
-
-    for (let i = 0; i < emptyCells.length; i += 1) {
-      newBoard[emptyCells[i]] = mark;
-      const score = minimax(false, newBoard, 0, -Infinity, Infinity, mark);
-      newBoard[emptyCells[i]] = "";
-      if (score > bestScore) {
-        bestScore = score;
-        bestMove = emptyCells[i];
-      }
-    }
-    markCell(bestMove, mark);
-  };
-
-  const computerMove = (mark) => {
-    if (ended) {
-      return;
-    }
-    setTimeout(() => {
-      makeBestMove(mark);
-    }, 200);
   };
 
   useEffect(() => {

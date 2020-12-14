@@ -5,6 +5,8 @@ import { shallow } from "enzyme";
 import { Grid } from "../Grid";
 import { Square } from "../Square";
 
+jest.useFakeTimers();
+
 const grid = shallow(<Grid />);
 describe("Grid test", () => {
   it('should be selectable by class "grid"', () => {
@@ -47,5 +49,14 @@ describe("Grid test", () => {
 
   it("next turn should be X", () => {
     expect(grid.childAt(0).text()).toContain("Next Player: X");
+  });
+
+  it("should call setTimeout", () => {
+    // simulate PvC game start
+    grid.find("#PvC").simulate("click");
+    grid.find("#markX").simulate("click");
+    grid.find("#Computer").simulate("click");
+
+    expect(setTimeout).toHaveBeenCalledTimes(1);
   });
 });
