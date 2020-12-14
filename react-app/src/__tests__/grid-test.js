@@ -17,7 +17,7 @@ describe("Grid test", () => {
     expect(grid.find(Square).length).toBe(9);
   });
   it("check initial value of all squares", () => {
-    grid.find(Square).map((square) => expect(square.prop("turn")).toBe(""));
+    grid.find(Square).map((square) => expect(square.prop("turn")).toBeFalsy());
   });
   it("h1 should be choose type of game", () => {
     expect(grid.childAt(0).text()).toContain("Choose Type of Game");
