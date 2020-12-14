@@ -39,7 +39,7 @@ export const checkWinner = (squares) => {
     }
   }
 
-  return "";
+  return null;
 };
 
 export const minimax = (isMAXturn, board, depth, alpha, beta, maxMark) => {
@@ -97,9 +97,9 @@ export const Grid = () => {
   const [firstPlayerClass, setFirstPlayerClass] = useState("not");
 
   useEffect(() => {
-    const win = checkWinner(squares);
-    if (win !== "") {
-      gameOver(`WINNER: ${win}`);
+    const winner = checkWinner(squares);
+    if (winner) {
+      gameOver(`WINNER: ${winner}`);
 
       return;
     }
@@ -223,9 +223,7 @@ export const Grid = () => {
       setFirstPlayerClass("");
     }
     setMarkClass("not");
-    // if (game !== "PvC") {
     setEnded(false);
-    // }
   };
 
   return (

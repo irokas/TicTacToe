@@ -1,9 +1,3 @@
-import React from "react";
-import { shallow } from "enzyme";
-
-import { Grid } from "../Grid";
-import { Square } from "../Square";
-
 jest.useFakeTimers();
 
 const gridJs = require("../Grid.js");
@@ -31,7 +25,7 @@ describe("Tests the functions inside Grid.js", () => {
   //  declareWinner tests
   it("should not declare winner", () => {
     const notWinnerTests = ["X", "O", "X", "X", "O", "X", "O", "X", "O"];
-    expect(gridJs.checkWinner(notWinnerTests)).toBe("");
+    expect(gridJs.checkWinner(notWinnerTests)).toBeFalsy();
   });
   it("should declare winner", () => {
     const xWinnerSquares = ["X", "O", "X", "O", "O", "X", "O", "X", "X"];
