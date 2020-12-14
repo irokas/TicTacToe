@@ -93,6 +93,7 @@ export const Grid = () => {
   const [ended, setEnded] = useState(true);
   const [markClass, setMarkClass] = useState("not");
   const [clicked, setClicked] = useState(false);
+  const [firstPlayer, setFirstPlayer] = useState("");
   const [firstPlayerClass, setFirstPlayerClass] = useState("not");
 
   useEffect(() => {
@@ -145,7 +146,12 @@ export const Grid = () => {
   };
 
   const handleClick = (squareIndex) => {
-    if (ended || turn === "" || !(squares[squareIndex] === "")) {
+    if (
+      ended ||
+      turn === "" ||
+      !(squares[squareIndex] === "") ||
+      (game === "PvC" && firstPlayer === "")
+    ) {
       return;
     }
     markCell(squareIndex, turn);
@@ -180,17 +186,21 @@ export const Grid = () => {
     }, 200);
   };
 
-  const changeFirstPlayer = (firstPlayer) => {
+  useEffect(() => {
     if (firstPlayer === "C") {
       const mark = turn === "X" ? "O" : "X";
       setTurn(mark);
+      setTitle(`Next Player: ${mark}`);
       computerMove(mark);
+    } else if (firstPlayer === "P") {
+      setTitle(`Next Player: ${turn}`);
     }
     setFirstPlayerClass("not");
-  };
+  }, [firstPlayer]);
 
   const gameChange = (newGame, newTitle) => {
     setEnded(true);
+    setFirstPlayer("");
     setSquares(Array(9).fill(""));
     setGame(newGame);
     setTitle(newTitle);
@@ -213,7 +223,9 @@ export const Grid = () => {
       setFirstPlayerClass("");
     }
     setMarkClass("not");
+    // if (game !== "PvC") {
     setEnded(false);
+    // }
   };
 
   return (
@@ -229,10 +241,10 @@ export const Grid = () => {
           </button>
         </div>
         <div className={firstPlayerClass}>
-          <button id="Person" onClick={() => changeFirstPlayer("P")}>
+          <button id="Person" onClick={() => setFirstPlayer("P")}>
             Person
           </button>
-          <button id="Computer" onClick={() => changeFirstPlayer("C")}>
+          <button id="Computer" onClick={() => setFirstPlayer("C")}>
             Computer
           </button>
         </div>
@@ -250,7 +262,10 @@ export const Grid = () => {
         <button id="PvC" onClick={() => gameChange("PvC", "Choose Mark")}>
           Person vs Computer
         </button>
-        <button id="CvC" onClick={() => gameChange("CvC", "Choose Mark")}>
+        <button
+          id="CvC"
+          onClick={() => gameChange("CvC", "Choose First Player")}
+        >
           Computer vs Computer
         </button>
       </div>
