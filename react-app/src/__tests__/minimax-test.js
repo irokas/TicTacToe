@@ -27,6 +27,7 @@ describe("Test the minimax algorithm", () => {
     }
     expect(bestMove).toBe(6);
   });
+
   it("should return cell #8", () => {
     const board = ["X", "O", "O", "", "X", "", "", "X", ""];
     let bestScore = -2;

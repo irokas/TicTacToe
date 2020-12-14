@@ -6,6 +6,7 @@ import { Square } from "../Square";
 
 const grid = shallow(<Grid />);
 grid.find("#PvP").simulate("clicl");
+
 describe("test reset button", () => {
   it("should be empty at the end", () => {
     grid.find(Square).at(3).simulate("click"); // X->3
