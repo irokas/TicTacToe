@@ -91,10 +91,10 @@ export const Grid = () => {
   const [title, setTitle] = useState("Choose Type of Game");
   const [game, setGame] = useState("");
   const [ended, setEnded] = useState(true);
-  const [markClass, setMarkClass] = useState("not");
+  const [markClass, setMarkClass] = useState("not-display");
   const [clicked, setClicked] = useState(false);
   const [firstPlayer, setFirstPlayer] = useState("");
-  const [firstPlayerClass, setFirstPlayerClass] = useState("not");
+  const [firstPlayerClass, setFirstPlayerClass] = useState("not-display");
 
   const setTitleAndTurn = (mark) => {
     setTitle(`Next Player: ${mark}`);
@@ -192,18 +192,18 @@ export const Grid = () => {
     } else if (firstPlayer === "P") {
       setTitle(`Next Player: ${turn}`);
     }
-    setFirstPlayerClass("not");
+    setFirstPlayerClass("not-display");
   }, [firstPlayer]);
 
   const gameChange = (newGame, newTitle) => {
     setEnded(true);
     setFirstPlayer("");
-    setFirstPlayerClass("not");
+    setFirstPlayerClass("not-display");
     setSquares(Array(9).fill(""));
     setGame(newGame);
     setTitle(newTitle);
     if (!newGame) {
-      setMarkClass("not");
+      setMarkClass("not-display");
     } else {
       setMarkClass("");
     }
@@ -220,7 +220,7 @@ export const Grid = () => {
       setTitle("Choose first player");
       setFirstPlayerClass("");
     }
-    setMarkClass("not");
+    setMarkClass("not-display");
     setEnded(false);
   };
 
