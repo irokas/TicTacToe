@@ -23,14 +23,16 @@ describe("Grid test", () => {
     grid.find(Square).map((square) => expect(square.prop("turn")).toBeFalsy());
   });
 
-  it("h1 should be choose type of game", () => {
+  it("Title should be choose type of game", () => {
     expect(grid.childAt(0).text()).toContain("Choose Type of Game");
   });
 
   it("check square value after first click", () => {
+    // simulate PvP game start
     grid.find("#PvP").simulate("click");
     grid.find("#markX").simulate("click");
     grid.find(Square).at(1).simulate("click");
+
     expect(grid.find(Square).at(1).prop("turn")).toBe("X");
   });
 
@@ -43,7 +45,7 @@ describe("Grid test", () => {
     expect(grid.find(Square).at(4).prop("turn")).toBe("O");
   });
 
-  it("next turn should be x again", () => {
+  it("next turn should be X", () => {
     expect(grid.childAt(0).text()).toContain("Next Player: X");
   });
 });
