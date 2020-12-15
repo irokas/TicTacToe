@@ -51,7 +51,16 @@ describe("Grid test", () => {
     expect(grid.childAt(0).text()).toContain("Next Player: X");
   });
 
-  it("should call setTimeout for 200ms", () => {
+  it("should call setTimeout when person starts", () => {
+    // simulate PvC game start
+    grid.find("#PvC").simulate("click");
+    grid.find("#markX").simulate("click");
+    grid.find("#Person").simulate("click");
+
+    expect(setTimeout).toHaveBeenCalledTimes(1);
+  });
+
+  it("should call setTimeout for 200ms when computer starts", () => {
     // simulate PvC game start
     grid.find("#PvC").simulate("click");
     grid.find("#markX").simulate("click");
@@ -64,6 +73,15 @@ describe("Grid test", () => {
   it("Computer should make best move", () => {
     jest.runOnlyPendingTimers();
     expect(grid.find(Square).at(0).prop("value")).toBe("O");
+  });
+
+  it("Computer should win", () => {
+    grid.find(Square).at(1).simulate("click");
+    jest.runOnlyPendingTimers();
+    grid.find(Square).at(8).simulate("click");
+    jest.runOnlyPendingTimers();
+
+    expect(grid.find("#title").text()).toContain("WINNER: O");
   });
 
   it("Should play Computer vs Computer and end as a tie", () => {
