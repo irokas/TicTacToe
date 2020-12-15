@@ -107,6 +107,15 @@ export const Grid = () => {
     setEnded(true);
   };
 
+  const markCell = (squareIndex, mark) => {
+    let newBoard = squares.slice();
+    if (ended || !game) {
+      return;
+    }
+    newBoard[squareIndex] = mark;
+    setSquares(newBoard);
+  };
+
   const makeBestMove = (mark) => {
     let bestScore = -Infinity;
     let bestMove;
@@ -123,6 +132,7 @@ export const Grid = () => {
         bestMove = emptyCells[i];
       }
     }
+
     markCell(bestMove, mark);
   };
 
@@ -130,13 +140,13 @@ export const Grid = () => {
     if (ended) {
       return;
     }
-    setTimeout(() => {
-      makeBestMove(mark);
-    }, 200);
+    makeBestMove(mark);
   };
   useEffect(() => {
     if (game === "PvC" && clicked) {
-      computerMove(turn);
+      setTimeout(() => {
+        computerMove(turn);
+      }, 200);
       setClicked(false);
     }
   }, [turn, game, ended]);
@@ -145,7 +155,7 @@ export const Grid = () => {
     if (game === "CvC" && !ended) {
       computerMove(turn);
     }
-  }, [turn, ended]);
+  }, [turn, ended, game]);
 
   useEffect(() => {
     const winner = checkWinner(squares);
@@ -165,15 +175,6 @@ export const Grid = () => {
       setTitleAndTurn(mark);
     }
   }, [squares]);
-
-  const markCell = (squareIndex, mark) => {
-    let newBoard = squares.slice();
-    if (ended || !game) {
-      return;
-    }
-    newBoard[squareIndex] = mark;
-    setSquares(newBoard);
-  };
 
   const handleClick = (squareIndex) => {
     if (ended || squares[squareIndex] || (game === "PvC" && !firstPlayer)) {
