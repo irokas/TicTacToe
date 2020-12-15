@@ -3,7 +3,7 @@ import { Square } from "./Square";
 
 export const findEmptyCells = (squares) => {
   const reducer = (accumulator, currentValue, currentIndex) => {
-    if (currentValue === "") {
+    if (!currentValue) {
       accumulator.push(currentIndex);
     }
 
@@ -33,7 +33,7 @@ export const checkWinner = (squares) => {
     if (
       squares[combination[0]] === squares[combination[1]] &&
       squares[combination[1]] === squares[combination[2]] &&
-      squares[combination[0]] !== ""
+      squares[combination[0]]
     ) {
       return squares[combination[0]];
     }
