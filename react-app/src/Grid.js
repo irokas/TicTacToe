@@ -129,6 +129,7 @@ export const Grid = () => {
       makeBestMove(mark);
     }, 200);
   };
+
   useEffect(() => {
     const winner = checkWinner(squares);
     if (winner) {

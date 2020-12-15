@@ -51,7 +51,7 @@ describe("Grid test", () => {
     expect(grid.childAt(0).text()).toContain("Next Player: X");
   });
 
-  it("should call setTimeout", () => {
+  it("should call setTimeout for 200ms", () => {
     // simulate PvC game start
     grid.find("#PvC").simulate("click");
     grid.find("#markX").simulate("click");
@@ -59,5 +59,10 @@ describe("Grid test", () => {
 
     expect(setTimeout).toHaveBeenCalledTimes(1);
     expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 200);
+  });
+
+  it("Computer should make best move", () => {
+    jest.runOnlyPendingTimers();
+    expect(grid.find(Square).at(0).prop("value")).toBe("O");
   });
 });
