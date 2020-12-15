@@ -109,9 +109,6 @@ export const Grid = () => {
 
   const markCell = (squareIndex, mark) => {
     let newBoard = squares.slice();
-    if (ended || !game) {
-      return;
-    }
     newBoard[squareIndex] = mark;
     setSquares(newBoard);
   };
@@ -177,7 +174,12 @@ export const Grid = () => {
   }, [squares]);
 
   const handleClick = (squareIndex) => {
-    if (ended || squares[squareIndex] || (game === "PvC" && !firstPlayer)) {
+    if (
+      ended ||
+      squares[squareIndex] ||
+      (game === "PvC" && !firstPlayer) ||
+      !game
+    ) {
       return;
     }
     markCell(squareIndex, turn);
