@@ -183,8 +183,7 @@ export const Grid = () => {
   useEffect(() => {
     if (firstPlayer === "C") {
       const mark = turn === "X" ? "O" : "X";
-      setTurn(mark);
-      setTitle(`Next Player: ${mark}`);
+      setTitleAndTurn(mark);
       computerMove(mark);
     } else if (firstPlayer === "P") {
       setTitle(`Next Player: ${turn}`);
