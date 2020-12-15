@@ -65,4 +65,13 @@ describe("Grid test", () => {
     jest.runOnlyPendingTimers();
     expect(grid.find(Square).at(0).prop("value")).toBe("O");
   });
+
+  it("Should play Computer vs Computer and end as a tie", () => {
+    // simulate CvC game start
+    grid.find("#CvC").simulate("click");
+    grid.find("#markX").simulate("click");
+    expect(grid.find("#title").text()).toContain("Starting the game");
+    jest.runOnlyPendingTimers();
+    expect(grid.find(Square).at(0).prop("value")).toBe("X");
+  });
 });

@@ -102,6 +102,11 @@ export const Grid = () => {
     setTurn(mark);
   };
 
+  const gameOver = (newTitle) => {
+    setTitle(newTitle);
+    setEnded(true);
+  };
+
   const makeBestMove = (mark) => {
     let bestScore = -Infinity;
     let bestMove;
@@ -129,6 +134,18 @@ export const Grid = () => {
       makeBestMove(mark);
     }, 200);
   };
+  useEffect(() => {
+    if (game === "PvC" && clicked) {
+      computerMove(turn);
+      setClicked(false);
+    }
+  }, [turn, game, ended]);
+
+  useEffect(() => {
+    if (game === "CvC" && !ended) {
+      computerMove(turn);
+    }
+  }, [turn, ended]);
 
   useEffect(() => {
     const winner = checkWinner(squares);
@@ -144,20 +161,10 @@ export const Grid = () => {
     }
     if (!ended) {
       const mark = turn === "X" ? "O" : "X";
+
       setTitleAndTurn(mark);
     }
   }, [squares]);
-
-  useEffect(() => {
-    if (game === "PvC" && clicked) {
-      computerMove(turn);
-      setClicked(false);
-    }
-
-    if (game === "CvC") {
-      computerMove(turn);
-    }
-  }, [turn, game, ended]);
 
   const markCell = (squareIndex, mark) => {
     let newBoard = squares.slice();
@@ -166,11 +173,6 @@ export const Grid = () => {
     }
     newBoard[squareIndex] = mark;
     setSquares(newBoard);
-  };
-
-  const gameOver = (newTitle) => {
-    setTitle(newTitle);
-    setEnded(true);
   };
 
   const handleClick = (squareIndex) => {
