@@ -161,12 +161,10 @@ export const Grid = () => {
   const markCell = (squareIndex, mark) => {
     let newBoard = squares.slice();
     if (ended || !game) {
-      return false;
+      return;
     }
     newBoard[squareIndex] = mark;
     setSquares(newBoard);
-
-    return newBoard;
   };
 
   const gameOver = (newTitle) => {
