@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Square } from "./Square";
 
+const markX = "X";
+const markO = "O";
+
 export const findEmptyCells = (squares) => {
   const reducer = (accumulator, currentValue, currentIndex) => {
     if (!currentValue) {
@@ -43,7 +46,7 @@ export const checkWinner = (squares) => {
 };
 
 export const minimax = (isMAXturn, board, depth, alpha, beta, maxMark) => {
-  const minMark = maxMark === "O" ? "X" : "O";
+  const minMark = maxMark === markO ? markX : markO;
   let newBoard = board.slice();
 
   const emptyCells = findEmptyCells(board);
@@ -96,6 +99,13 @@ export const Grid = () => {
   const [firstPlayer, setFirstPlayer] = useState("");
   const [firstPlayerClass, setFirstPlayerClass] = useState("not-display");
 
+  const personVsPerson = "PvP";
+  const personVsComputer = "PvC";
+  const computerVsComputer = "CvC";
+
+  const computer = "Computer";
+  const person = "Person";
+
   const setTitleAndTurn = (mark) => {
     setTitle(`Next Player: ${mark}`);
 
@@ -140,7 +150,7 @@ export const Grid = () => {
     makeBestMove(mark);
   };
   useEffect(() => {
-    if (game === "PvC" && clicked) {
+    if (game === personVsComputer && clicked) {
       setTimeout(() => {
         computerMove(turn);
       }, 200);
@@ -149,7 +159,7 @@ export const Grid = () => {
   }, [turn, game, ended]);
 
   useEffect(() => {
-    if (game === "CvC" && !ended) {
+    if (game === computerVsComputer && !ended) {
       computerMove(turn);
     }
   }, [turn, ended, game]);
@@ -167,7 +177,7 @@ export const Grid = () => {
       return;
     }
     if (!ended) {
-      const mark = turn === "X" ? "O" : "X";
+      const mark = turn === markX ? markO : markX;
 
       setTitleAndTurn(mark);
     }
@@ -177,7 +187,7 @@ export const Grid = () => {
     if (
       ended ||
       squares[squareIndex] ||
-      (game === "PvC" && !firstPlayer) ||
+      (game === personVsComputer && !firstPlayer) ||
       !game
     ) {
       return;
@@ -187,11 +197,11 @@ export const Grid = () => {
   };
 
   useEffect(() => {
-    if (firstPlayer === "C") {
-      const mark = turn === "X" ? "O" : "X";
+    if (firstPlayer === computer) {
+      const mark = turn === markX ? markO : markX;
       setTitleAndTurn(mark);
       computerMove(mark);
-    } else if (firstPlayer === "P") {
+    } else if (firstPlayer === person) {
       setTitle(`Next Player: ${turn}`);
     }
     setFirstPlayerClass("not-display");
@@ -214,9 +224,9 @@ export const Grid = () => {
   const gameStart = (newTurn) => {
     setClicked(false);
     setTurn(newTurn);
-    if (game === "CvC") {
+    if (game === computerVsComputer) {
       setTitle("Starting the game");
-    } else if (game === "PvP") {
+    } else if (game === personVsPerson) {
       setTitle(`Next Player: ${newTurn}`);
     } else {
       setTitle("Choose first player");
@@ -231,18 +241,18 @@ export const Grid = () => {
       <h1 id="title">
         {title}
         <div className={markClass}>
-          <button id="markX" onClick={() => gameStart("X")}>
+          <button id="markX" onClick={() => gameStart(markX)}>
             X
           </button>
-          <button id="markO" onClick={() => gameStart("O")}>
+          <button id="markO" onClick={() => gameStart(markO)}>
             O
           </button>
         </div>
         <div className={firstPlayerClass}>
-          <button id="Person" onClick={() => setFirstPlayer("P")}>
+          <button id={person} onClick={() => setFirstPlayer(person)}>
             Person
           </button>
-          <button id="Computer" onClick={() => setFirstPlayer("C")}>
+          <button id={computer} onClick={() => setFirstPlayer(computer)}>
             Computer
           </button>
         </div>
@@ -254,15 +264,21 @@ export const Grid = () => {
         >
           Reset
         </button>
-        <button id="PvP" onClick={() => gameChange("PvP", "Choose Mark")}>
+        <button
+          id={personVsPerson}
+          onClick={() => gameChange(personVsPerson, "Choose Mark")}
+        >
           Person vs Person
         </button>
-        <button id="PvC" onClick={() => gameChange("PvC", "Choose Mark")}>
+        <button
+          id={personVsComputer}
+          onClick={() => gameChange(personVsComputer, "Choose Mark")}
+        >
           Person vs Computer
         </button>
         <button
-          id="CvC"
-          onClick={() => gameChange("CvC", "Choose First Player")}
+          id={computerVsComputer}
+          onClick={() => gameChange(computerVsComputer, "Choose First Player")}
         >
           Computer vs Computer
         </button>
