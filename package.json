@@ -19,8 +19,7 @@
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
-    "lint": "eslint --fix --ext .js,.jsx .",
-    "heroku-postbuild": "yarn run build && (cd server && yarn start)"
+    "lint": "eslint --fix --ext .js,.jsx ."
   },
   "eslintConfig": {
     "extends": [
