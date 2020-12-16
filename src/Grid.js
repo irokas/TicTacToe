@@ -160,7 +160,9 @@ export const Grid = () => {
 
   useEffect(() => {
     if (game === computerVsComputer && !ended) {
-      computerMove(turn);
+      setTimeout(() => {
+        computerMove(turn);
+      }, 200);
     }
   }, [turn, ended, game]);
 

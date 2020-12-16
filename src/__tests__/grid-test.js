@@ -88,6 +88,7 @@ describe("Grid test", () => {
     // simulate CvC game start
     grid.find("#CvC").simulate("click");
     grid.find("#markO").simulate("click");
+    jest.runAllTimers();
     expect(grid.find("#title").text()).toContain("IT'S A TIE");
   });
 });
