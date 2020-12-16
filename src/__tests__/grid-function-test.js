@@ -1,6 +1,15 @@
 const gridJs = require("../Grid.js");
 
 describe("Tests the functions inside Grid.js", () => {
+  //  changeMark tests
+  it("should return O when X is given", () => {
+    expect(gridJs.changeMark("X")).toBe("O");
+  });
+
+  it("should return X when O is given", () => {
+    expect(gridJs.changeMark("O")).toBe("X");
+  });
+
   //  findEmptyCells tests
   it("should test findEmptyCells called with an empty array with length = 9", () => {
     expect(gridJs.findEmptyCells(Array(9).fill("")).length).toBe(9);

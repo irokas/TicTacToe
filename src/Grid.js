@@ -4,6 +4,10 @@ import { Square } from "./Square";
 const markX = "X";
 const markO = "O";
 
+export const changeMark = (currentMark) => {
+  return currentMark === markX ? markO : markX;
+};
+
 export const findEmptyCells = (squares) => {
   const reducer = (accumulator, currentValue, currentIndex) => {
     if (!currentValue) {
@@ -46,7 +50,7 @@ export const checkWinner = (squares) => {
 };
 
 export const minimax = (isMAXturn, board, depth, alpha, beta, maxMark) => {
-  const minMark = maxMark === markO ? markX : markO;
+  const minMark = changeMark(maxMark);
   let newBoard = board.slice();
 
   const emptyCells = findEmptyCells(board);
@@ -89,15 +93,17 @@ export const minimax = (isMAXturn, board, depth, alpha, beta, maxMark) => {
 };
 
 export const Grid = () => {
+  const hideClass = "not-display";
+
   const [turn, setTurn] = useState("");
   const [squares, setSquares] = useState(Array(9).fill(""));
   const [title, setTitle] = useState("Choose Type of Game");
   const [game, setGame] = useState("");
   const [ended, setEnded] = useState(true);
-  const [markClass, setMarkClass] = useState("not-display");
+  const [markClass, setMarkClass] = useState(hideClass);
   const [clicked, setClicked] = useState(false);
   const [firstPlayer, setFirstPlayer] = useState("");
-  const [firstPlayerClass, setFirstPlayerClass] = useState("not-display");
+  const [firstPlayerClass, setFirstPlayerClass] = useState(hideClass);
 
   const personVsPerson = "PvP";
   const personVsComputer = "PvC";
@@ -108,7 +114,6 @@ export const Grid = () => {
 
   const setTitleAndTurn = (mark) => {
     setTitle(`Next Player: ${mark}`);
-
     setTurn(mark);
   };
 
@@ -149,6 +154,7 @@ export const Grid = () => {
     }
     makeBestMove(mark);
   };
+
   useEffect(() => {
     if (game === personVsComputer && clicked) {
       setTimeout(() => {
@@ -179,9 +185,7 @@ export const Grid = () => {
       return;
     }
     if (!ended) {
-      const mark = turn === markX ? markO : markX;
-
-      setTitleAndTurn(mark);
+      setTitleAndTurn(changeMark(turn));
     }
   }, [squares]);
 
@@ -200,24 +204,24 @@ export const Grid = () => {
 
   useEffect(() => {
     if (firstPlayer === computer) {
-      const mark = turn === markX ? markO : markX;
+      const mark = changeMark(turn);
       setTitleAndTurn(mark);
       computerMove(mark);
     } else if (firstPlayer === person) {
       setTitle(`Next Player: ${turn}`);
     }
-    setFirstPlayerClass("not-display");
+    setFirstPlayerClass(hideClass);
   }, [firstPlayer]);
 
   const gameChange = (newGame, newTitle) => {
     setEnded(true);
     setFirstPlayer("");
-    setFirstPlayerClass("not-display");
+    setFirstPlayerClass(hideClass);
     setSquares(Array(9).fill(""));
     setGame(newGame);
     setTitle(newTitle);
     if (!newGame) {
-      setMarkClass("not-display");
+      setMarkClass(hideClass);
     } else {
       setMarkClass("");
     }
@@ -234,7 +238,7 @@ export const Grid = () => {
       setTitle("Choose first player");
       setFirstPlayerClass("");
     }
-    setMarkClass("not-display");
+    setMarkClass(hideClass);
     setEnded(false);
   };
 
