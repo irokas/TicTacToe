@@ -1,44 +1,44 @@
-
 {
-    "extends": "airbnb",
-    "rules": {
-        "react/jsx-filename-extension": "off",
-        "operator-linebreak": "off",
-        "quotes":"off",
-        "react/button-has-type":"off",
-        "prefer-const": "off",
-        "arrow-body-style": "off",
-        "import/prefer-default-export": "off",
-        "no-use-before-define":"off",
-        "no-console":"warn",
-        "prefer-template": "warn",
-        "no-tabs":"off",
-        "padding-line-between-statements": [
-            "error",
-            {
-                "blankLine": "always",
-                "prev": "export",
-                "next": "export"
-            },
-            {
-                "blankLine": "always",
-                "prev": "multiline-const",
-                "next": "multiline-const"
-            },
-            {
-                "blankLine": "always",
-                "prev":"*",
-                "next": "return"
-            }
-        ],
-        "jsx-a11y/click-events-have-key-events": "off",
-        "jsx-a11y/no-noninteractive-element-interactions":"off",
-        "react/destructuring-assignment": "off",
-        "react/prop-types": "off",
-        "no-param-reassign": "off",
-        "comma-dangle":"off"
-    },
-    "env": {
-        "jest": true
-    }
+  "extends": "airbnb",
+  "rules": {
+    "react/jsx-filename-extension": "off",
+    "operator-linebreak": "off",
+    "quotes": "off",
+    "react/button-has-type": "off",
+    "prefer-const": "off",
+    "arrow-body-style": "off",
+    "import/prefer-default-export": "off",
+    "no-use-before-define": "off",
+    "no-console": "warn",
+    "prefer-template": "warn",
+    "no-tabs": "off",
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "export",
+        "next": "export"
+      },
+      {
+        "blankLine": "always",
+        "prev": "multiline-const",
+        "next": "multiline-const"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "return"
+      }
+    ],
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "react/destructuring-assignment": "off",
+    "react/prop-types": "off",
+    "no-param-reassign": "off",
+    "comma-dangle": "off",
+    "no-unused-vars": "warn"
+  },
+  "env": {
+    "jest": true
+  }
 }
