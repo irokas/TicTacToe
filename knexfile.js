@@ -1,24 +1,12 @@
 module.exports = {
   development: {
     client: "postgres",
-    connection: "postgres://localhost/games",
+    connection: "postgres://localhost/results",
     migrations: {
       directory: "./db/migrations",
     },
     seeds: {
-      directory: "./db/seeds/dev",
-    },
-    useNullAsDefault: true,
-  },
-
-  test: {
-    client: "postgres",
-    connection: "postgres://localhost/games_test",
-    migrations: {
-      directory: "./db/migrations",
-    },
-    seeds: {
-      directory: "./db/seeds/test",
+      directory: "./db/seeds/",
     },
     useNullAsDefault: true,
   },
