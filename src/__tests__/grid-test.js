@@ -13,8 +13,8 @@ describe("Grid test", () => {
     expect(grid.is(".grid")).toBe(true);
   });
 
-  it("should contain 5 children", () => {
-    expect(grid.children().length).toBe(5);
+  it("should contain 6 children", () => {
+    expect(grid.children().length).toBe(6);
   });
 
   it("should contain 9 squares", () => {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Square } from "./Square";
 
+const axios = require("axios");
+
 const markX = "X";
 const markO = "O";
 
@@ -101,6 +103,7 @@ export const Grid = () => {
   const [game, setGame] = useState("");
   const [ended, setEnded] = useState(true);
   const [markClass, setMarkClass] = useState(hideClass);
+  const [saveClass, setSaveClass] = useState(hideClass);
   const [clicked, setClicked] = useState(false);
   const [firstPlayer, setFirstPlayer] = useState("");
   const [firstPlayerClass, setFirstPlayerClass] = useState(hideClass);
@@ -118,6 +121,7 @@ export const Grid = () => {
   };
 
   const gameOver = (newTitle) => {
+    setSaveClass("");
     setTitle(newTitle);
     setEnded(true);
   };
@@ -214,6 +218,7 @@ export const Grid = () => {
   }, [firstPlayer]);
 
   const gameChange = (newGame, newTitle) => {
+    setSaveClass(hideClass);
     setEnded(true);
     setFirstPlayer("");
     setFirstPlayerClass(hideClass);
@@ -228,6 +233,7 @@ export const Grid = () => {
   };
 
   const gameStart = (newTurn) => {
+    setSaveClass(hideClass);
     setClicked(false);
     setTurn(newTurn);
     if (game === computerVsComputer) {
@@ -240,6 +246,16 @@ export const Grid = () => {
     }
     setMarkClass(hideClass);
     setEnded(false);
+  };
+
+  const passData = () => {
+    if (!checkWinner(squares) && !declareTie(squares)) {
+      return;
+    }
+    const squaresString = squares.join(",");
+    axios.post(`/add/${squaresString}`).then((res) => {
+      return res;
+    });
   };
 
   return (
@@ -323,6 +339,9 @@ export const Grid = () => {
           );
         })}
       </th>
+      <button onClick={() => passData()} className={saveClass}>
+        Save
+      </button>
     </table>
   );
 };
