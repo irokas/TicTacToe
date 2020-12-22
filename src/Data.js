@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 
 const createDate = (newDate) => {
@@ -16,24 +17,34 @@ const createDate = (newDate) => {
 
   return [date, time].join(" ");
 };
+
+const deleteInstance = async (id) => {
+  await axios.post(`/delete/${id}`);
+};
+
 export const Data = (props) => {
   if (props.data.length) {
     return (
       <table>
         <tr className="data-tr">
-          <th className="data-th">ID</th>
           <th className="data-th">Created At</th>
           <th className="data-th">Retrieve Game</th>
+          <th className="data-th">Delete Game</th>
         </tr>
         {props.data.map((instance) => {
           return (
             <tr className="data-tr">
-              <td className="data-td">{instance.id}</td>
               <td className="data-td">{createDate(instance.created_at)}</td>
               <td className="data-td">
-                <button onClick={() => props.set(instance.board.split(","))}>
+                <button
+                  onClick={() => props.setBoard(instance.board.split(","))}
+                >
                   Retrieve Game
-                  {` ${instance.id}`}
+                </button>
+              </td>
+              <td className="data-td">
+                <button onClick={() => deleteInstance(instance.id)}>
+                  Delete Game
                 </button>
               </td>
             </tr>

@@ -26,6 +26,10 @@ app.get("/createTable", async () => {
   });
 });
 
+app.post("/delete/:id", async (req, res) => {
+  await knex("games").del().where({ id: req.params.id });
+});
+
 app.post("/add/:board", (req, res) => {
   const { board } = req.params;
   knex("games")

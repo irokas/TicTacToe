@@ -356,7 +356,7 @@ export const Grid = () => {
         </button>
       </div>
       <div>
-        <Data data={data} set={setSquares} />
+        <Data data={data} setBoard={setSquares} />
       </div>
     </table>
   );
