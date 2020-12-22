@@ -9,11 +9,11 @@
   flex-direction: column;
   align-items: center;
 }
-th,
-td {
+.grid-th,
+.grid-td {
   display: flex;
 }
-td {
+.grid-td {
   align-items: center;
   justify-content: center;
   font-size: 50px;
@@ -45,4 +45,29 @@ button:hover {
 #title {
   display: flex;
   align-items: center;
+}
+
+.table-row {
+  display: flex;
+}
+.data-table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.data-td,
+.data-th {
+  font-size: 15px;
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.data-tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+#get-button {
+  max-width: 200px;
 }

@@ -14,6 +14,18 @@ app.get("/getTable", async (req, res) => {
   res.send(bots);
 });
 
+app.get("/dropTable", async () => {
+  await knex.schema.dropTable("games");
+});
+
+app.get("/createTable", async () => {
+  await knex.schema.createTable("games", (t) => {
+    t.increments("id").primary().unsigned();
+    t.string("board");
+    t.timestamp("created_at").defaultTo(knex.fn.now());
+  });
+});
+
 app.post("/add/:board", (req, res) => {
   const { board } = req.params;
   knex("games")
@@ -21,7 +33,6 @@ app.post("/add/:board", (req, res) => {
     .then(() => {
       console.log("inserted");
     });
-  console.log(board.split(","));
 });
 
 app.listen(PORT, () => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Square } from "./Square";
+import { Data } from "./Data";
 
 const axios = require("axios");
 
@@ -107,6 +108,7 @@ export const Grid = () => {
   const [clicked, setClicked] = useState(false);
   const [firstPlayer, setFirstPlayer] = useState("");
   const [firstPlayerClass, setFirstPlayerClass] = useState(hideClass);
+  const [data, setData] = useState({});
 
   const personVsPerson = "PvP";
   const personVsComputer = "PvC";
@@ -258,6 +260,12 @@ export const Grid = () => {
     });
   };
 
+  const getData = () => {
+    axios.get("/getTable").then((res) => {
+      setData(res.data);
+    });
+  };
+
   return (
     <table className="grid">
       <h1 id="title">
@@ -306,7 +314,7 @@ export const Grid = () => {
         </button>
       </div>
 
-      <th>
+      <th className="grid-th">
         {[0, 1, 2].map((key) => {
           return (
             <Square
@@ -317,7 +325,7 @@ export const Grid = () => {
           );
         })}
       </th>
-      <th>
+      <th className="grid-th">
         {[3, 4, 5].map((key) => {
           return (
             <Square
@@ -328,7 +336,7 @@ export const Grid = () => {
           );
         })}
       </th>
-      <th>
+      <th className="grid-th">
         {[6, 7, 8].map((key) => {
           return (
             <Square
@@ -339,9 +347,17 @@ export const Grid = () => {
           );
         })}
       </th>
-      <button onClick={() => passData()} className={saveClass}>
-        Save
-      </button>
+      <div className="button-row">
+        <button onClick={() => passData()} className={saveClass}>
+          Save
+        </button>
+        <button onClick={() => getData()} id="get-button">
+          Get Old Games
+        </button>
+      </div>
+      <div>
+        <Data data={data} set={setSquares} />
+      </div>
     </table>
   );
 };
