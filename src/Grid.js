@@ -250,10 +250,7 @@ export const Grid = () => {
     setEnded(false);
   };
 
-  const passData = () => {
-    if (!checkWinner(squares) && !declareTie(squares)) {
-      return;
-    }
+  const saveData = () => {
     const squaresString = squares.join(",");
     axios.post(`/add/${squaresString}`).then((res) => {
       return res;
@@ -348,7 +345,7 @@ export const Grid = () => {
         })}
       </th>
       <div className="button-row">
-        <button onClick={() => passData()} className={saveClass}>
+        <button onClick={() => saveData()} className={saveClass}>
           Save
         </button>
         <button onClick={() => getData()} id="get-button">
