@@ -10,8 +10,8 @@ app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
 
 app.get("/getTable", async (req, res) => {
-  const bots = await knex.select("*").from("games");
-  res.send(bots);
+  const table = await knex.select("*").from("games");
+  res.send(table);
 });
 
 app.get("/dropTable", async () => {
