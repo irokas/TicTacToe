@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 
-const createDate = (newDate) => {
+export const createDate = (newDate) => {
   const fullDate = new Date(newDate.replace(" ", "T"));
   const date = [
     `0${fullDate.getDate()}`.slice(-2),
@@ -18,7 +18,7 @@ const createDate = (newDate) => {
   return [date, time].join(" ");
 };
 
-const deleteInstance = async (id) => {
+export const deleteInstance = async (id) => {
   await axios.post(`/delete/${id}`);
 };
 
@@ -33,7 +33,7 @@ export const Data = (props) => {
         </tr>
         {props.data.map((instance) => {
           return (
-            <tr className="data-tr">
+            <tr className="data-tr" key={instance.id}>
               <td className="data-td">{createDate(instance.created_at)}</td>
               <td className="data-td">
                 <button
