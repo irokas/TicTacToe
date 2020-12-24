@@ -250,17 +250,15 @@ export const Grid = () => {
     setEnded(false);
   };
 
-  const saveData = () => {
+  const saveData = async () => {
     const squaresString = squares.join(",");
-    axios.post(`/add/${squaresString}`).then((res) => {
-      return res;
-    });
+    const res = await axios.post(`/add/${squaresString}`);
+    setData(res.data);
   };
 
-  const getData = () => {
-    axios.get("/getTable").then((res) => {
-      setData(res.data);
-    });
+  const getData = async () => {
+    const res = await axios.get("/getTable");
+    setData(res.data);
   };
 
   return (
