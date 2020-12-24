@@ -261,6 +261,11 @@ export const Grid = () => {
     setData(res.data);
   };
 
+  const deleteInstance = async (id) => {
+    const res = await axios.post(`/delete/${id}`);
+    setData(res.data);
+  };
+
   return (
     <table className="grid">
       <h1 id="title">
@@ -351,7 +356,7 @@ export const Grid = () => {
         </button>
       </div>
       <div>
-        <Data data={data} setBoard={setSquares} />
+        <Data data={data} setBoard={setSquares} delete={deleteInstance} />
       </div>
     </table>
   );

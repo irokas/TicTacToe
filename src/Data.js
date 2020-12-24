@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 
 export const createDate = (newDate) => {
@@ -16,10 +15,6 @@ export const createDate = (newDate) => {
   ].join(":");
 
   return [date, time].join(" ");
-};
-
-export const deleteInstance = async (id) => {
-  await axios.post(`/delete/${id}`);
 };
 
 export const Data = (props) => {
@@ -43,7 +38,7 @@ export const Data = (props) => {
                 </button>
               </td>
               <td className="data-td">
-                <button onClick={() => deleteInstance(instance.id)}>
+                <button onClick={() => props.delete(instance.id)}>
                   Delete Game
                 </button>
               </td>
