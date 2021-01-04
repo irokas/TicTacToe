@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState as useStateMock } from "react";
 import { shallow } from "enzyme";
 import axios from "axios";
 import { Grid } from "../Grid";
@@ -72,5 +72,18 @@ describe("Test axios calls", () => {
     dataInstance.find(".delete-button").at(2).simulate("click");
     expect(axios.post).toHaveBeenCalledTimes(2);
     expect(axios.post).toHaveBeenLastCalledWith("/delete/11");
+  });
+
+  it("Rettrieving a game should set the board appropriately", () => {
+    dataInstance.find(".retrieve-button").at(2).simulate("click");
+    expect(grid.find("Square").at(0).prop("value")).toBe("O");
+    expect(grid.find("Square").at(1).prop("value")).toBe("O");
+    expect(grid.find("Square").at(2).prop("value")).toBe("X");
+    expect(grid.find("Square").at(3).prop("value")).toBe("X");
+    expect(grid.find("Square").at(4).prop("value")).toBe("O");
+    expect(grid.find("Square").at(5).prop("value")).toBe("");
+    expect(grid.find("Square").at(6).prop("value")).toBe("");
+    expect(grid.find("Square").at(7).prop("value")).toBe("X");
+    expect(grid.find("Square").at(8).prop("value")).toBe("O");
   });
 });
