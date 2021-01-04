@@ -32,13 +32,17 @@ export const Data = (props) => {
               <td className="data-td">{createDate(instance.created_at)}</td>
               <td className="data-td">
                 <button
+                  className="retrieve-button"
                   onClick={() => props.setBoard(instance.board.split(","))}
                 >
                   Retrieve Game
                 </button>
               </td>
               <td className="data-td">
-                <button onClick={() => props.delete(instance.id)}>
+                <button
+                  className="delete-button"
+                  onClick={() => props.delete(instance.id)}
+                >
                   Delete Game
                 </button>
               </td>

@@ -20,6 +20,21 @@ const newData = [
     board: "O,O,X,X,O,,,X,O",
     created_at: "2020-12-22T14:03:52.255Z",
   },
+  {
+    id: 15,
+    board: "O,O,X,X,O,,,X,O",
+    created_at: "2020-12-23T14:03:52.255Z",
+  },
+  {
+    id: 19,
+    board: "O,O,X,X,O,,,X,O",
+    created_at: "2020-12-23T16:05:52.235Z",
+  },
+  {
+    id: 23,
+    board: "O,O,X,X,O,,,X,O",
+    created_at: "2020-12-24T09:12:52.225Z",
+  },
 ];
 const dataInstance = shallow(<Data data={newData} />);
 

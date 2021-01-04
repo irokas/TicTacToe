@@ -348,7 +348,11 @@ export const Grid = () => {
         })}
       </th>
       <div className="button-row">
-        <button onClick={() => saveData()} className={saveClass}>
+        <button
+          onClick={() => saveData()}
+          className={saveClass}
+          id="save-button"
+        >
           Save
         </button>
         <button onClick={() => getData()} id="get-button">
