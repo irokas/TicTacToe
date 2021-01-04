@@ -1,4 +1,4 @@
-import React, { useState as useStateMock } from "react";
+import React from "react";
 import { shallow } from "enzyme";
 import axios from "axios";
 import { Grid } from "../Grid";
