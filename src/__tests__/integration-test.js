@@ -86,4 +86,9 @@ describe("Test axios calls", () => {
     expect(grid.find("Square").at(7).prop("value")).toBe("X");
     expect(grid.find("Square").at(8).prop("value")).toBe("O");
   });
+
+  it("Should return empty data instance of given data is empty", () => {
+    const emptyWrapper = shallow(<Data data={[]} />);
+    expect(emptyWrapper.matchesElement(<div />)).toBeTruthy();
+  });
 });
