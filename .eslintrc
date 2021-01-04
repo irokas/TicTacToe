@@ -36,7 +36,8 @@
     "react/prop-types": "off",
     "no-param-reassign": "off",
     "comma-dangle": "off",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "consistent-return": "off"
   },
   "env": {
     "jest": true

@@ -52,6 +52,4 @@ export const Data = (props) => {
       </table>
     );
   }
-
-  return <table />;
 };
