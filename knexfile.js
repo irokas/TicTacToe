@@ -8,7 +8,6 @@ module.exports = {
     seeds: {
       directory: "./db/seeds/",
     },
-    useNullAsDefault: true,
   },
 
   production: {
@@ -20,6 +19,5 @@ module.exports = {
     seeds: {
       directory: "./db/seeds/",
     },
-    useNullAsDefault: true,
   },
 };
