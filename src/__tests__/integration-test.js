@@ -74,7 +74,7 @@ describe("Test axios calls", () => {
     expect(axios.post).toHaveBeenLastCalledWith("/delete/11");
   });
 
-  it("Rettrieving a game should set the board appropriately", () => {
+  it("Retrieving a game should set the board appropriately", () => {
     dataInstance.find(".retrieve-button").at(2).simulate("click");
     const board = data[2].board.split(",");
     for (let i = 0; i < 9; i += 1) {
