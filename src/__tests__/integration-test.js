@@ -76,15 +76,10 @@ describe("Test axios calls", () => {
 
   it("Rettrieving a game should set the board appropriately", () => {
     dataInstance.find(".retrieve-button").at(2).simulate("click");
-    expect(grid.find("Square").at(0).prop("value")).toBe("O");
-    expect(grid.find("Square").at(1).prop("value")).toBe("O");
-    expect(grid.find("Square").at(2).prop("value")).toBe("X");
-    expect(grid.find("Square").at(3).prop("value")).toBe("X");
-    expect(grid.find("Square").at(4).prop("value")).toBe("O");
-    expect(grid.find("Square").at(5).prop("value")).toBe("");
-    expect(grid.find("Square").at(6).prop("value")).toBe("");
-    expect(grid.find("Square").at(7).prop("value")).toBe("X");
-    expect(grid.find("Square").at(8).prop("value")).toBe("O");
+    const board = data[2].board.split(",");
+    for (let i = 0; i < 9; i += 1) {
+      expect(grid.find("Square").at(i).prop("value")).toBe(board[i]);
+    }
   });
 
   it("Should return empty data instance of given data is empty", () => {
