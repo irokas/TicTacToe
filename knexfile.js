@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     client: "pg",
-    connection: "postgres://localhost/results",
+    connection: process.env.DATABASE_URL || "postgres://localhost/results",
     migrations: {
       directory: "./db/migrations",
     },
