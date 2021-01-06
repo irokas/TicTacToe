@@ -16,7 +16,6 @@ const getTable = async () => {
 };
 
 app.get("/getTable", async (req, res) => {
-  console.log(process.env.DATABASE_URL);
   const table = await knex.select("*").from("games");
   res.send(table);
 });
