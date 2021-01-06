@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     client: "pg",
-    connection: "postgres://localhost/results",
+    connection: "postgres://localhost/tictactoe_db",
     migrations: {
       directory: "./db/migrations",
     },
