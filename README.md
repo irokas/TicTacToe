@@ -1,5 +1,9 @@
 # Getting Started with Tic Tac Toe App
 
+## Before Use
+
+In the project and in the server directory run yarn to install all packages.
+
 ## Available Scripts
 
 In the project directory, you can run:
