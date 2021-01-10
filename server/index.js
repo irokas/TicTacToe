@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
     secret: "secretcode",
+    cookie: { maxAge: 36000000 }, // session time = 10 hours
     resave: true,
     saveUninitialized: true,
   })
