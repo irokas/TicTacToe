@@ -7,7 +7,6 @@ export const Homepage = () => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [data, setData] = useState(null);
 
   // booleans for password validations
   const [containsUL, setContainsUL] = useState(false); // uppercase letter
@@ -15,6 +14,7 @@ export const Homepage = () => {
   const [containsN, setContainsN] = useState(false); // number
   const [containsSC, setContainsSC] = useState(false); // special character
   const [contains8C, setContains8C] = useState(false); // min 8 characters
+
   // checks all validations are true
   const [allValid, setAllValid] = useState(false);
 

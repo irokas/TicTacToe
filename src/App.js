@@ -15,8 +15,6 @@ export const App = () => {
       url: "/getUser",
     }).then((res) => {
       setData(res.data);
-
-      return !(res.data === "");
     });
   };
 
