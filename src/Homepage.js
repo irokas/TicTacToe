@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MustContainItem from "./MustContainItem";
 
-export const Homepage = () => {
+export const Homepage = (props) => {
   const [registerUsername, setRegisterUsername] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [loginUsername, setLoginUsername] = useState("");
@@ -47,6 +47,10 @@ export const Homepage = () => {
       },
       withCredentials: true,
       url: "/login",
+    }).then((res) => {
+      if (res.data === "Success") {
+        props.getUser();
+      }
     });
   };
 

@@ -20,7 +20,7 @@ export const App = () => {
 
   useEffect(getUser);
   if (!data) {
-    return <Homepage />;
+    return <Homepage getUser={getUser} />;
   }
 
   return <Grid user={data.username} />;
