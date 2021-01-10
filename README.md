@@ -2,7 +2,9 @@
 
 ## Before Use
 
-In the project and in the server directory run yarn to install all packages.
+To install all packages in the project and server directory run:
+
+### `yarn`
 
 ## Available Scripts
 
