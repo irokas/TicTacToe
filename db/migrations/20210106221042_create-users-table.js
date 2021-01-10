@@ -1,17 +1,10 @@
 exports.up = (knex) => {
-  let createQuery = `CREATE TABLE users(
-    id SERIAL PRIMARY KEY NOT NULL,
-    username TEXT,
-    token TEXT,
-    password TEXT,
-    created_at TIMESTAMP
-  )`;
-
-  return knex.raw(createQuery);
+  return knex.schema.createTable("users", (table) => {
+    table.increments();
+    table.string("username");
+    table.string("password");
+  });
 };
-
 exports.down = (knex) => {
-  let dropQuery = `DROP TABLE users`;
-
-  return knex.raw(dropQuery);
+  return knex.schema.dropTableIfExists("users");
 };

@@ -37,7 +37,10 @@
     "no-param-reassign": "off",
     "comma-dangle": "off",
     "no-unused-vars": "warn",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "implicit-arrow-linebreak": "off",
+    "react/jsx-curly-newline": "off",
+    "object-curly-newline": "off"
   },
   "env": {
     "jest": true

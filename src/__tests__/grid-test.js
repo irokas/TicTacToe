@@ -9,12 +9,8 @@ jest.useFakeTimers();
 
 const grid = shallow(<Grid />);
 describe("Grid test", () => {
-  it('should be selectable by class "grid"', () => {
-    expect(grid.is(".grid")).toBe(true);
-  });
-
-  it("should contain 7 children", () => {
-    expect(grid.children().length).toBe(7);
+  it("should contain 2 children", () => {
+    expect(grid.children().length).toBe(2);
   });
 
   it("should contain 9 squares", () => {
@@ -26,7 +22,7 @@ describe("Grid test", () => {
   });
 
   it("Title should be choose type of game", () => {
-    expect(grid.childAt(0).text()).toContain("Choose Type of Game");
+    expect(grid.childAt(1).childAt(0).text()).toContain("Choose Type of Game");
   });
 
   it("check square value after first click", () => {
@@ -39,7 +35,7 @@ describe("Grid test", () => {
   });
 
   it("next turn should be O", () => {
-    expect(grid.childAt(0).text()).toContain("Next Player: O");
+    expect(grid.childAt(1).childAt(0).text()).toContain("Next Player: O");
   });
 
   it("check square value after second click", () => {
@@ -48,7 +44,7 @@ describe("Grid test", () => {
   });
 
   it("next turn should be X", () => {
-    expect(grid.childAt(0).text()).toContain("Next Player: X");
+    expect(grid.childAt(1).childAt(0).text()).toContain("Next Player: X");
   });
 
   it("should call setTimeout when person starts", () => {

@@ -95,7 +95,7 @@ export const minimax = (isMAXturn, board, depth, alpha, beta, maxMark) => {
   return isMAXturn ? Math.max(...scores) : Math.min(...scores);
 };
 
-export const Grid = () => {
+export const Grid = (props) => {
   const hideClass = "not-display";
 
   const [turn, setTurn] = useState("");
@@ -266,103 +266,120 @@ export const Grid = () => {
     setData(res.data);
   };
 
-  return (
-    <table className="grid">
-      <h1 id="title">
-        {title}
-        <div className={markClass}>
-          <button id="markX" onClick={() => gameStart(markX)}>
-            X
-          </button>
-          <button id="markO" onClick={() => gameStart(markO)}>
-            O
-          </button>
-        </div>
-        <div className={firstPlayerClass}>
-          <button id={person} onClick={() => setFirstPlayer(person)}>
-            Person
-          </button>
-          <button id={computer} onClick={() => setFirstPlayer(computer)}>
-            Computer
-          </button>
-        </div>
-      </h1>
-      <div className="button-row">
-        <button
-          id="reset"
-          onClick={() => gameChange("", "Choose Type of Game")}
-        >
-          Reset
-        </button>
-        <button
-          id={personVsPerson}
-          onClick={() => gameChange(personVsPerson, "Choose Mark")}
-        >
-          Person vs Person
-        </button>
-        <button
-          id={personVsComputer}
-          onClick={() => gameChange(personVsComputer, "Choose Mark")}
-        >
-          Person vs Computer
-        </button>
-        <button
-          id={computerVsComputer}
-          onClick={() => gameChange(computerVsComputer, "Choose First Player")}
-        >
-          Computer vs Computer
-        </button>
-      </div>
+  const logout = () => {
+    axios({
+      method: "GET",
+      withCredentials: true,
+      url: "/logout",
+    });
+  };
 
-      <th className="grid-th">
-        {[0, 1, 2].map((key) => {
-          return (
-            <Square
-              onClick={() => handleClick(key)}
-              value={squares[key]}
-              key={key}
-            />
-          );
-        })}
-      </th>
-      <th className="grid-th">
-        {[3, 4, 5].map((key) => {
-          return (
-            <Square
-              onClick={() => handleClick(key)}
-              value={squares[key]}
-              key={key}
-            />
-          );
-        })}
-      </th>
-      <th className="grid-th">
-        {[6, 7, 8].map((key) => {
-          return (
-            <Square
-              onClick={() => handleClick(key)}
-              value={squares[key]}
-              key={key}
-            />
-          );
-        })}
-      </th>
-      <div className="button-row">
-        <button
-          onClick={() => saveData()}
-          className={saveClass}
-          id="save-button"
-        >
-          Save
-        </button>
-        <button onClick={() => getData()} id="get-button">
-          Get Old Games
-        </button>
-      </div>
-      <div>
-        <Data data={data} setBoard={setSquares} delete={deleteInstance} />
-      </div>
-    </table>
+  return (
+    <div>
+      <h3>
+        Welcome back,
+        {` ${props.user}`}
+        <button onClick={logout}>Logout</button>
+      </h3>
+      <table className="grid">
+        <h1 id="title">
+          {title}
+          <div className={markClass}>
+            <button id="markX" onClick={() => gameStart(markX)}>
+              X
+            </button>
+            <button id="markO" onClick={() => gameStart(markO)}>
+              O
+            </button>
+          </div>
+          <div className={firstPlayerClass}>
+            <button id={person} onClick={() => setFirstPlayer(person)}>
+              Person
+            </button>
+            <button id={computer} onClick={() => setFirstPlayer(computer)}>
+              Computer
+            </button>
+          </div>
+        </h1>
+        <div className="button-row">
+          <button
+            id="reset"
+            onClick={() => gameChange("", "Choose Type of Game")}
+          >
+            Reset
+          </button>
+          <button
+            id={personVsPerson}
+            onClick={() => gameChange(personVsPerson, "Choose Mark")}
+          >
+            Person vs Person
+          </button>
+          <button
+            id={personVsComputer}
+            onClick={() => gameChange(personVsComputer, "Choose Mark")}
+          >
+            Person vs Computer
+          </button>
+          <button
+            id={computerVsComputer}
+            onClick={() =>
+              gameChange(computerVsComputer, "Choose First Player")
+            }
+          >
+            Computer vs Computer
+          </button>
+        </div>
+
+        <th className="grid-th">
+          {[0, 1, 2].map((key) => {
+            return (
+              <Square
+                onClick={() => handleClick(key)}
+                value={squares[key]}
+                key={key}
+              />
+            );
+          })}
+        </th>
+        <th className="grid-th">
+          {[3, 4, 5].map((key) => {
+            return (
+              <Square
+                onClick={() => handleClick(key)}
+                value={squares[key]}
+                key={key}
+              />
+            );
+          })}
+        </th>
+        <th className="grid-th">
+          {[6, 7, 8].map((key) => {
+            return (
+              <Square
+                onClick={() => handleClick(key)}
+                value={squares[key]}
+                key={key}
+              />
+            );
+          })}
+        </th>
+        <div className="button-row">
+          <button
+            onClick={() => saveData()}
+            className={saveClass}
+            id="save-button"
+          >
+            Save
+          </button>
+          <button onClick={() => getData()} id="get-button">
+            Get Old Games
+          </button>
+        </div>
+        <div>
+          <Data data={data} setBoard={setSquares} delete={deleteInstance} />
+        </div>
+      </table>
+    </div>
   );
 };
 
