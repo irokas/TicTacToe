@@ -19,11 +19,11 @@ export const Homepage = (props) => {
   const [allValid, setAllValid] = useState(false);
 
   const mustContainData = [
-    ["An uppercase letter (a-z)", containsUL],
-    ["A lowercase letter (A-Z)", containsLL],
-    ["A number (0-9)", containsN],
-    ["A special character (!@#$)", containsSC],
-    ["At least 8 characters", contains8C],
+    ["An uppercase letter (a-z)", containsUL, 0],
+    ["A lowercase letter (A-Z)", containsLL, 1],
+    ["A number (0-9)", containsN, 2],
+    ["A special character (!@#$)", containsSC, 3],
+    ["At least 8 characters", contains8C, 4],
   ];
 
   const register = async () => {
@@ -90,8 +90,12 @@ export const Homepage = (props) => {
       contains8C &&
       registerUsername
     ) {
-      setAllValid(true);
-    } else setAllValid(false);
+      if (!allValid) {
+        setAllValid(true);
+      }
+    } else if (allValid) {
+      setAllValid(false);
+    }
   });
 
   return (
@@ -106,6 +110,7 @@ export const Homepage = (props) => {
             onChange={(e) => {
               setRegisterUsername(e.target.value);
             }}
+            id="register-username"
           />
           <input
             placeholder="password"
@@ -115,15 +120,21 @@ export const Homepage = (props) => {
             onChange={(e) => {
               setRegisterPassword(e.target.value);
             }}
+            id="register-password"
           />
-          <button onClick={register} disabled={!allValid} type="submit">
+          <button
+            onClick={register}
+            disabled={!allValid}
+            type="submit"
+            id="signup-button"
+          >
             Sign Up
           </button>
         </form>
         <h4>Password must contain:</h4>
         <div className="must-container cfb">
           {mustContainData.map((info) => (
-            <MustContainItem data={info} />
+            <MustContainItem data={info} key={info[2]} />
           ))}
         </div>
       </div>

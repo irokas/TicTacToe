@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 import { Grid } from "./Grid";
 import { Homepage } from "./Homepage";
@@ -25,3 +24,5 @@ export const App = () => {
 
   return <Grid user={data.username} />;
 };
+
+export default App;

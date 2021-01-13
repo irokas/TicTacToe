@@ -279,7 +279,9 @@ export const Grid = (props) => {
       <h3>
         Welcome back,
         {` ${props.user}`}
-        <button onClick={logout}>Logout</button>
+        <button onClick={logout} id="logout-button">
+          Logout
+        </button>
       </h3>
       <table className="grid">
         <h1 id="title">
