@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
 // ---------------------------Routing---------------------- //
 
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
 app.post("/register", async (req, res) => {
   knex
@@ -116,6 +116,6 @@ app.post("/add/:board", async (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-  console.log(`server started on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`server started on port ${port}`);
 });
