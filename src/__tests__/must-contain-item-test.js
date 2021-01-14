@@ -2,7 +2,6 @@ import React from "react";
 import { shallow } from "enzyme";
 import { MustContainItem } from "../MustContainItem";
 
-const mustContainItem = shallow(<MustContainItem data={["An uppercase letter (a-z)", true, 0]} key="0" />);
 describe("mustContainItem tests", () => {
   it("should be selectable by class MustContainItem", () => {
     expect(
