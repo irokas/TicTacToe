@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import MustContainItem from "./MustContainItem";
+import { MustContainItem } from "./MustContainItem";
 
-export const Homepage = (props) => {
+export const Homepage = () => {
   const [registerUsername, setRegisterUsername] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [loginUsername, setLoginUsername] = useState("");
@@ -47,10 +47,6 @@ export const Homepage = (props) => {
       },
       withCredentials: true,
       url: "/login",
-    }).then((res) => {
-      if (res.data === "Success") {
-        props.getUser();
-      }
     });
   };
 
@@ -110,6 +106,7 @@ export const Homepage = (props) => {
             onChange={(e) => {
               setRegisterUsername(e.target.value);
             }}
+            value={registerUsername}
             id="register-username"
           />
           <input
@@ -120,6 +117,7 @@ export const Homepage = (props) => {
             onChange={(e) => {
               setRegisterPassword(e.target.value);
             }}
+            value={registerPassword}
             id="register-password"
           />
           <button
@@ -145,15 +143,19 @@ export const Homepage = (props) => {
             placeholder="username"
             autoComplete="username"
             type="text"
+            id="login-username"
             onChange={(e) => setLoginUsername(e.target.value)}
+            value={loginUsername}
           />
           <input
             placeholder="password"
             autoComplete="current-password"
             type="password"
+            id="login-password"
             onChange={(e) => setLoginPassword(e.target.value)}
+            value={loginPassword}
           />
-          <button onClick={login} type="submit">
+          <button onClick={login} type="submit" id="login-button">
             Login
           </button>
         </form>

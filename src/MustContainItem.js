@@ -3,7 +3,7 @@ import React from "react";
 // styling
 import "./styles.css";
 
-const MustContainItem = (props) => {
+export const MustContainItem = (props) => {
   const { data } = props;
   const label = data[0];
   const meetsReq = data[1];
