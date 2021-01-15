@@ -123,7 +123,7 @@ app.post("/delete/:id", async (req, res) => {
 });
 
 app.post("/add/:board", async (req, res) => {
-  const userId = getUserId(req);
+  const userId = await getUserId(req);
   const { board } = req.params;
   knex("games")
     .insert({ board, user_id: userId })
