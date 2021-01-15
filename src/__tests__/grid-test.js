@@ -1,11 +1,12 @@
 import React from "react";
-
+import axios from "axios";
 import { shallow } from "enzyme";
 
 import { Grid } from "../Grid";
 import { Square } from "../Square";
 
 jest.useFakeTimers();
+jest.mock('axios');
 
 const grid = shallow(<Grid />);
 describe("Grid test", () => {
@@ -86,5 +87,15 @@ describe("Grid test", () => {
     grid.find("#markO").simulate("click");
     jest.runAllTimers();
     expect(grid.find("#title").text()).toContain("IT'S A TIE");
+  });
+
+  it("Should call axios correctly on logout", () => {
+    grid.find("#logout-button").simulate("click");
+    expect(axios).toHaveBeenCalledTimes(1);
+    expect(axios).toHaveBeenLastCalledWith({
+      method: "GET",
+      withCredentials: true,
+      url: "/logout",
+    });
   });
 });
