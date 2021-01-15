@@ -27,10 +27,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
-// ---------------------------Routing---------------------- //
 
 const port = process.env.PORT || 5000;
 
+// ---------------------------Authentication---------------------- //
 app.post("/register", async (req, res) => {
   knex
     .select("*")
@@ -73,19 +73,34 @@ app.get("/getUser", async (req, res) => {
   res.send(req.user);
 });
 
-const getTable = async () => {
-  const table = await knex.select("*").from("games");
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
+// ---------------------------Gameplay---------------------- //
+
+const getUserId = async (req) => {
+  const user = await knex
+    .select('id')
+    .from('users')
+    .where('username', req.user.username);
+
+  return user[0].id;
+};
+
+const getTable = async (req) => {
+  const userId = await getUserId(req);
+  const table = await knex
+    .select('*')
+    .from('games')
+    .where('user_id', userId);
 
   return table;
 };
-app.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
-});
 
 app.get("/getTable", async (req, res) => {
-  const table = await knex.select("*").from("games");
-  res.send(table);
+  res.send(await getTable(req));
 });
 
 app.get("/dropTable", async () => {
@@ -97,21 +112,23 @@ app.get("/createTable", async () => {
     t.increments("id").primary().unsigned();
     t.string("board");
     t.timestamp("created_at").defaultTo(knex.fn.now());
+    t.integer("user_id");
   });
 });
 
 app.post("/delete/:id", async (req, res) => {
   await knex("games").del().where({ id: req.params.id });
-  const table = await getTable();
+  const table = await getTable(req);
   await res.send(table);
 });
 
 app.post("/add/:board", async (req, res) => {
+  const userId = getUserId(req);
   const { board } = req.params;
   knex("games")
-    .insert({ board })
+    .insert({ board, user_id: userId })
     .then(async () => {
-      const table = await getTable();
+      const table = await getTable(req);
       await res.send(table);
     });
 });
